@@ -1,0 +1,22 @@
+{
+  "name": "code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "test": "mocha --reporter spec --compilers ts:ts-node/register test/**/*.test.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^7.0.18",
+    "@types/request": "0.0.43",
+    "@types/mocha": "^2.2.41",
+    "mocha": "^3.3.0"
+  },
+  "dependencies": {
+    "alexa-sdk": "^1.0.9",
+    "request": "^2.81.0"
+  }
+}

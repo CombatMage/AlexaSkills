@@ -1,0 +1,1 @@
+{"version":3,"file":"ParserModule.js","sourceRoot":"","sources":["modules/ParserModule.ts"],"names":[],"mappings":";;AAAA;IACI,MAAM;QACF,MAAM,CAAC,IAAI,CAAC;IAChB,CAAC;CACJ;AAJD,4BAIC;AAED,qBAA4B,OAAe;IACvC,IAAI,IAAI,GAAG,IAAI,CAAC,KAAK,CAAC,OAAO,CAAC,CAAC;IAC/B,MAAM,CAAC,IAAI,QAAQ,EAAE,CAAC;AAC1B,CAAC;AAHD,kCAGC"}
