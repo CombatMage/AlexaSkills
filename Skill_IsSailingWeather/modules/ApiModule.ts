@@ -5,7 +5,7 @@ import * as Out from './Logger';
 let host = 'api.openweathermap.org';
 let endpoint = '/data/2.5/forecast';
 
-let apiKey = 'a50b478e72ffeeaf8850a5b72bb68865';
+let apiKey = 'd0d0ebd199dd630ef800a557ef427882';
 
 export function getCurrentForecast(
     location: string,

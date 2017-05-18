@@ -5,6 +5,8 @@ var Api = require('./ApiModule');
 
 let city = 'Erkner,de';
 
+Out.logginEnabled = true;
+
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
 
