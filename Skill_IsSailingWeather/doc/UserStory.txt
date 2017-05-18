@@ -1,3 +1,21 @@
+﻿Launch:
+Alexa öffe Segel Wetter
+Hallo, ich kann dir einen Wind Wetterbericht geben. 
+Sage Alexa, wie ist der Wind in Berlin oder
+sage Alexa, wie ist der Wind auf meinem See.
+
+
+GetWeatherIntent:
+wie ist der Wind?
+ Location? -> Aktuell herscht Windstärke 6
+ else -> In welcher Stadt liegt dein See?
+
+SetLocationIntent:
+ich segel auf dem Flakensee in Erkner.
+ TODO check location valid
+
+
+
 1. Simple
 Alexa frage "Segel Wetter" wie der Wind ist.
 => Aktuell herrscht Windstärke 6, Der Wind weht aus westlicher Richtung
