@@ -1,0 +1,16 @@
+Testing Instructions:
+Es wird kein weiterer Account und keine zusätzliche Hardware benötigt. 
+TODO
+
+Short Skill Description (160):
+Frag Alexa ob heute gutes Wetter zum Segeln ist. Sie gibt dir ihre Einschätzung sowie die aktuelle Wind Situation.
+TODO
+
+Full Skill Description:
+Du kannst Alexa nach der aktullen Wind-Wetterlage fragen.
+TODO
+
+Example Phrases:
+1. TODO
+2. TODO
+3. TODO

@@ -1,0 +1,7 @@
+1. Simple
+Alexa frage "Segel Wetter" wie der Wind ist.
+=> Aktuell herrscht Windstärke 6, Der Wind weht aus westlicher Richtung
+
+2. Erweitert
+Alexa frage "Segel Wetter" wie der Wind in "3 Stunden" ist.
+=> In 3 Stunden herrscht Windstärke 3, Der Wind weht aus südlicher Richtung

@@ -1,27 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Out = require("./Logger");
-class Wind {
-    constructor(object) {
-        this._speedMs = object.wind.speed;
-        this._degree = object.wind.deg;
-        this._timeUnix = object.dt;
-        this._timeHuman = object.dt_txt;
-    }
-    get speedMs() {
-        return this._speedMs;
-    }
-    get degree() {
-        return this._degree;
-    }
-    get timeUnix() {
-        return this._timeUnix;
-    }
-    get timeHuman() {
-        return this._timeHuman;
-    }
-}
-exports.Wind = Wind;
+const Wind_1 = require("./Wind");
 function parseToForecast(rawData) {
     Out.log('parseToForecast', [rawData]);
     try {
@@ -31,7 +11,11 @@ function parseToForecast(rawData) {
             return null;
         let result = new Array();
         for (let windObject of object.list) {
-            result.push(new Wind(windObject));
+            let speedMs = windObject.wind.speed;
+            let degree = windObject.wind.deg;
+            let timeUnix = windObject.dt;
+            let timeHuman = windObject.dt_txt;
+            result.push(new Wind_1.Wind(speedMs, degree, timeUnix, timeHuman));
         }
         return result;
     }

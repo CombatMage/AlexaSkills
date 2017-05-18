@@ -1,7 +1,7 @@
 var Alexa = require('alexa-sdk');
 
 var Out = require('./Logger');
-var Api = require('./ApiModule');
+var IntentHandler = require('./IntentModule');
 
 let city = 'Erkner,de';
 
@@ -10,7 +10,7 @@ Out.logginEnabled = true;
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
 
-    // alexa.appId = 'amzn1.echo-sdk-ams.app.1234';
+    // alexa.appId = 'amzn1.ask.skill.e0356906-3ba9-48c0-9402-a18fdfbc2819';
     // alexa.dynamoDBTableName = 'YourTableName'; // creates new table for session.attributes
 
     alexa.registerHandlers(handlers);
@@ -22,15 +22,12 @@ var handlers = {
         this.emit('MyIntent');
     },
     'IsSailingWeatherIntent': function () {
-        Api.getCurrentForecast(
-            city, 
+        IntentHandler.handleIntentIsSailingWeather(
+            city,
             (result) => {
                 Out.log('onResult', [result]);
-                this.emit(':tell', 'Success');
-            },
-            (error) => {
-                Out.log('onError', [error]);
-                this.emit(':tell', 'Failure: ' + result);
-            });
+                this.emit(':tell', result);
+            }
+        );
     }
 };
