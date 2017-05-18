@@ -13,7 +13,8 @@
     "@types/node": "^7.0.18",
     "@types/request": "0.0.43",
     "chai": "^3.5.0",
-    "mocha": "^3.3.0"
+    "mocha": "^3.3.0",
+    "typescript": "^2.3.2"
   },
   "dependencies": {
     "alexa-sdk": "^1.0.9",
