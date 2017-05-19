@@ -7,13 +7,12 @@ sage Alexa, wie ist der Wind auf meinem See.
 
 GetWeatherIntent:
 wie ist der Wind?
- Location? -> Aktuell herscht Windstärke 6
- else -> In welcher Stadt liegt dein See?
+  Location? -> Aktuell herscht Windstärke 6 in Erkner
+  else -> In welcher Stadt liegt dein See?
 
 SetLocationIntent:
 ich segel auf dem Flakensee in Erkner.
  TODO check location valid
-
 
 
 1. Simple

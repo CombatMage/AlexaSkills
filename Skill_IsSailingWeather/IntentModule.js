@@ -5,6 +5,10 @@ const Api = require("./ApiModule");
 const Parser = require("./ParserModule");
 const Sailing = require("./IsSailingModule");
 const Speak = require("./SpeakModule");
+function handleIntentLaunch(onFinished) {
+    onFinished(Speak.getLaunchMessage());
+}
+exports.handleIntentLaunch = handleIntentLaunch;
 function handleIntentIsSailingWeather(location, onFinished) {
     Api.getCurrentForecast(location, (result) => {
         let forecast = Parser.parseToForecast(result);
@@ -13,7 +17,7 @@ function handleIntentIsSailingWeather(location, onFinished) {
         let wind = Sailing.getWindFromForecast(forecast, Date.now());
         if (!wind)
             return handleError(onFinished);
-        let output = Speak.getPositiveResponseForWindSpeed(wind.speedBft);
+        let output = Speak.getPositiveResponseForWindSpeed(wind.speedBft, location);
         onFinished(output);
     }, (error) => {
         return handleError(onFinished);

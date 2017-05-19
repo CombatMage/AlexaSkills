@@ -4,6 +4,10 @@ import * as Parser from './ParserModule';
 import * as Sailing from './IsSailingModule';
 import * as Speak from './SpeakModule';
 
+export function handleIntentLaunch(onFinished: (string) => any) {
+    onFinished(Speak.getLaunchMessage());
+}
+
 export function handleIntentIsSailingWeather(
     location: string,
     onFinished: (string) => any) {
@@ -18,13 +22,19 @@ export function handleIntentIsSailingWeather(
             if (!wind)
                 return handleError(onFinished);
             
-            let output = Speak.getPositiveResponseForWindSpeed(wind.speedBft);
+            let output = Speak.getPositiveResponseForWindSpeed(wind.speedBft, location);
             onFinished(output);
         },
         (error) => {
             return handleError(onFinished);
         }
     )
+}
+
+export function handleIntentSetFavouriteLocation(
+
+) {
+    
 }
 
 function handleError(onResult: (string) => any) {
