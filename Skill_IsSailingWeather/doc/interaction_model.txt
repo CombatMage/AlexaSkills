@@ -1,0 +1,78 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "IsSailingWeatherIntent",
+      "samples": [
+        "ob heute Gutes Segelwetter ist",
+        "wie ist der Wind",
+        "ist der Wind gut",
+        "wie schaut es mit dem Wind aus",
+        "ist heute gutes Segel Wetter",
+        "kann ich heute gut Segeln",
+        "Wie ist das Wetter",
+        "Ist das Wetter gut",
+        "erzähle mir wie das Wetter ist",
+        "erzähle mir wie der Wind ist",
+        "macht es Sinn heute zu Segeln",
+        "Wind-Wetterbericht",
+        "Wie ist der Wind in {location}",
+        "Kann ich in {location} heute gut segeln",
+        "gib mir den Wetterbericht für {location} ",
+        "ist in {location} guter Wind",
+        "ist in {location} schlechter Wind",
+        "ist in {location} gutes Segelwetter",
+        "ist in {location} schlechtes Segelwetter"
+      ],
+      "slots": [
+        {
+          "name": "location",
+          "type": "AMAZON.DE_CITY",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "SetLocationIntent",
+      "samples": [
+        "ich segele in {location} ",
+        "{location} ",
+        "meine Stadt ist {location} ",
+        "ich will das Wetter für {location} ",
+        "die nächste Stadt ist {location}",
+        "die am nächsten gelegene Stadt ist {location}",
+        "mein See liegt in {location}",
+        "mein See ist {location}",
+        "mein Segelrevier ist {location}",
+        "mein Revier ist {location}",
+        "der Ort ist {location}",
+        "der Hafen liegt in {location}",
+        "mein Boot liegt in {location}",
+        "meine Jolle liegt in {location}",
+        "meine Jolle segelt in {location}",
+        "am Liebsten segele ich in {location}",
+        "ich segele am Liebsten in {location}",
+        "in {location} segel ich am Liebsten",
+        "meist segele ich in {location}"
+      ],
+      "slots": [
+        {
+          "name": "location",
+          "type": "AMAZON.DE_CITY",
+          "samples": []
+        }
+      ]
+    }
+  ]
+}
