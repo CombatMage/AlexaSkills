@@ -22,6 +22,24 @@ export class Wind {
         return this._timeHuman;
     }
 
+    get windDirection(): string {
+        if (isNumberInRange(this._degree, 22.5, 67.5))
+            return 'NE';
+        if (isNumberInRange(this._degree, 67.5, 112.5))
+            return 'E';
+        if (isNumberInRange(this._degree, 112.5, 157.5))
+            return 'SE';
+        if (isNumberInRange(this._degree, 157.5, 202.5))
+            return 'S';
+        if (isNumberInRange(this._degree, 202.5, 247.5))
+            return 'SW';
+        if (isNumberInRange(this._degree, 247.5, 292.5))
+            return 'W';
+        if (isNumberInRange(this._degree, 292.5, 337.5))
+            return 'NW';
+        return 'N';
+    }
+
     get speedBft(): number {
         if (this._speedMs < 0.3)
             return 0;
@@ -49,4 +67,8 @@ export class Wind {
             return 11;
         return 12
     }
+}
+
+function isNumberInRange(value: number, start: number, end: number): boolean {
+    return value >= start && value < end;
 }

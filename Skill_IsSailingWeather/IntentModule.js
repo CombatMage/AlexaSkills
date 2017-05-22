@@ -24,6 +24,9 @@ function handleIntentIsSailingWeather(location, onFinished) {
     });
 }
 exports.handleIntentIsSailingWeather = handleIntentIsSailingWeather;
+function handleIntentSetFavouriteLocation() {
+}
+exports.handleIntentSetFavouriteLocation = handleIntentSetFavouriteLocation;
 function handleError(onResult) {
     Out.log('handleError');
     onResult('error');

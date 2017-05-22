@@ -2,13 +2,22 @@ var expect = require('chai').expect;
 var unit = require('../SpeakModule')
 
 describe('Helper for language ouput', function() {
+    describe('getPositiveResponseForWindDirection', function() {
+        it('should return a positive response for alexa, containing the given direction', function() {
+            response = unit.getPositiveResponseForWindDirection('NE');
+            expect(response).to.be.string;
+            expect(response).to.contain(unit.DIR_NE);
+            expect(response).to.contain(unit.TELL_RESULT_DIRECTION);
+        });
+    });
+
     describe('getPositiveResponseForWindSpeed', function() {
         it('should return a positive response for alexa, containing the given wind information', function() {
             response = unit.getPositiveResponseForWindSpeed(6,'Erkner');
             expect(response).to.be.string;
             expect(response).to.contain('6');
             expect(response).to.contain('Erkner');
-            expect(response).to.contain(unit.TELL_RESULT);
+            expect(response).to.contain(unit.TELL_RESULT_STRENGTH);
         });
     });
 
