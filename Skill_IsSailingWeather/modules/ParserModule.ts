@@ -1,10 +1,24 @@
 import * as Out from './Logger';
 import { Wind } from './Wind';
+import { ApiError } from './ApiError';
+
+export function parseToError(rawData: string): ApiError {
+    Out.log('parseToError', [rawData])
+    try {
+        let object = JSON.parse(rawData);
+        return new ApiError(object.cod);
+    }
+    catch (exception) {
+        Out.log('parseToError', [rawData], String(exception));
+        return null;
+    }
+}
 
 export function parseToForecast(rawData: string): Array<Wind> {
     Out.log('parseToForecast', [rawData])
     try {
         let object = JSON.parse(rawData);
+
         let count = object.cnt;
         if (!count) 
             return null;

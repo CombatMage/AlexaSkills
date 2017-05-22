@@ -11,6 +11,10 @@ function handleIntentLaunch(onFinished) {
 exports.handleIntentLaunch = handleIntentLaunch;
 function handleIntentIsSailingWeather(location, onFinished) {
     Api.getCurrentForecast(location, (result) => {
+        let error = Parser.parseToError(result);
+        if (error) {
+            return handleApiError(location, error, onFinished);
+        }
         let forecast = Parser.parseToForecast(result);
         if (!forecast || forecast.length == 0)
             return handleError(onFinished);
@@ -24,11 +28,17 @@ function handleIntentIsSailingWeather(location, onFinished) {
     });
 }
 exports.handleIntentIsSailingWeather = handleIntentIsSailingWeather;
-function handleIntentSetFavouriteLocation() {
+function handleApiError(location, error, onResult) {
+    Out.log('handleApiError', [error.toString()]);
+    if (error.isCityUnkown) {
+        // TODO
+    }
+    else {
+        onResult(Speak.TELL_ERROR_UNKOWN);
+    }
 }
-exports.handleIntentSetFavouriteLocation = handleIntentSetFavouriteLocation;
 function handleError(onResult) {
     Out.log('handleError');
-    onResult('error');
+    onResult(Speak.TELL_ERROR_UNKOWN);
 }
 //# sourceMappingURL=IntentModule.js.map

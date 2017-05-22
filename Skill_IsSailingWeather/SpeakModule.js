@@ -4,6 +4,8 @@ exports.TELL_INTRO = `Hallo, ich kann dir einen Wind Wetterbericht geben.
     Sage Alexa, wie ist der Wind in Berlin`;
 exports.TELL_RESULT_STRENGTH = 'Aktuell herrscht Windstärke';
 exports.TELL_RESULT_DIRECTION = 'Der Wind kommt aus Richtung';
+exports.TELL_ERROR_CITY_NOT_FOUND = 'Tut mir Leid. Ich finde keine Daten';
+exports.TELL_ERROR_UNKOWN = 'Tut mir Leid, aber ich konnte keine Daten abrufen.';
 exports.ASK_LOCATION = `Wie lautet die am nächsten zu deinem See gelegene Stadt?
     Du kannst mir auch sagen in welcher Stadt du üblicherweise unterwegs bist.
 `;
@@ -28,6 +30,10 @@ function getRequestForLocation() {
     return exports.ASK_LOCATION;
 }
 exports.getRequestForLocation = getRequestForLocation;
+function getErrorForCityUnkown(location) {
+    return `${exports.TELL_ERROR_CITY_NOT_FOUND} für ${location}`;
+}
+exports.getErrorForCityUnkown = getErrorForCityUnkown;
 function getPositiveResponseForWindSpeed(speed, location) {
     return `${exports.TELL_RESULT_STRENGTH} ${speed} in ${location}.`;
 }

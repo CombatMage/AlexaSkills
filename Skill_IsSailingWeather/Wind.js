@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const Out = require("./Logger");
 class Wind {
     constructor(_speedMs, _degree, _timeUnix, _timeHuman) {
         this._speedMs = _speedMs;
@@ -20,6 +21,7 @@ class Wind {
         return this._timeHuman;
     }
     get windDirection() {
+        Out.log('windDirection', [this._degree.toString()]);
         if (isNumberInRange(this._degree, 22.5, 67.5))
             return 'NE';
         if (isNumberInRange(this._degree, 67.5, 112.5))
@@ -37,6 +39,7 @@ class Wind {
         return 'N';
     }
     get speedBft() {
+        Out.log('speedBft', [this._speedMs.toString()]);
         if (this._speedMs < 0.3)
             return 0;
         if (this._speedMs < 1.6)

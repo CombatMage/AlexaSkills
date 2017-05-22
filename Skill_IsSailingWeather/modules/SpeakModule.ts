@@ -3,6 +3,8 @@ export let TELL_INTRO = `Hallo, ich kann dir einen Wind Wetterbericht geben.
 
 export let TELL_RESULT_STRENGTH = 'Aktuell herrscht Windstärke';
 export let TELL_RESULT_DIRECTION = 'Der Wind kommt aus Richtung';
+export let TELL_ERROR_CITY_NOT_FOUND = 'Tut mir Leid. Ich finde keine Daten'; 
+export let TELL_ERROR_UNKOWN = 'Tut mir Leid, aber ich konnte keine Daten abrufen.';
 
 export let ASK_LOCATION = `Wie lautet die am nächsten zu deinem See gelegene Stadt?
     Du kannst mir auch sagen in welcher Stadt du üblicherweise unterwegs bist.
@@ -29,6 +31,10 @@ export function getLaunchMessage(): string {
 
 export function getRequestForLocation(): string {
     return ASK_LOCATION;
+}
+
+export function getErrorForCityUnkown(location: string): string {
+    return `${TELL_ERROR_CITY_NOT_FOUND} für ${location}`;
 }
 
 export function getPositiveResponseForWindSpeed(

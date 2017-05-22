@@ -2,6 +2,19 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Out = require("./Logger");
 const Wind_1 = require("./Wind");
+const ApiError_1 = require("./ApiError");
+function parseToError(rawData) {
+    Out.log('parseToError', [rawData]);
+    try {
+        let object = JSON.parse(rawData);
+        return new ApiError_1.ApiError(object.cod);
+    }
+    catch (exception) {
+        Out.log('parseToError', [rawData], String(exception));
+        return null;
+    }
+}
+exports.parseToError = parseToError;
 function parseToForecast(rawData) {
     Out.log('parseToForecast', [rawData]);
     try {

@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var parserModule = require('../ParserModule');
 
 describe('Parser for OpenWeatherApi', function() {
-    describe('parse forecast', function() {
+    describe('parseToForecast', function() {
         it('should return null for empty json', function() {
             var result = parserModule.parseToForecast('{}');
             expect(result).to.be.null
@@ -17,9 +17,20 @@ describe('Parser for OpenWeatherApi', function() {
             expect(result[0].timeHuman).to.be.eql("2017-05-18 09:00:00");
         });
     });
+    describe('parseToError', function() {
+        it('should parse json to error', function() {
+            let error = parserModule.parseToError(testDataError);
+            expect(error.errorCode).to.be.eql('404');
+        });
+    });
 });
 
-var testData = `{
+let testDataError = `{
+    "cod": "404",
+    "message": "city not found"
+}`;
+
+let testData = `{
     "cod": "200",
     "message": 0.0025,
     "cnt": 37,

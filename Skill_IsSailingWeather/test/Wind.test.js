@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var unit = require('../Wind')
+var unit = require('../Wind');
 
 describe('Wind', function() {
     describe('should convert wind speed from m/s to beauford', function() {

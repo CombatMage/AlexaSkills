@@ -54,7 +54,7 @@ var handlers = {
         else {
             Out.log('IsSailingWeatherIntent', [location], 'get data from OpenWeatherMap');
             IntentHandler.handleIntentIsSailingWeather(
-                'Erkner,de', // TODO user location
+                location,
                 (result) => {
                     Out.log('onResult', [result], 'finished: IsSailingWeatherIntent');
                     this.emit(':tell', result);
@@ -81,7 +81,7 @@ var handlers = {
             Out.log('SetLocationIntent', [location], 'get data from OpenWeatherMap');
             this.attributes[tbNameLocation] = location;
             IntentHandler.handleIntentIsSailingWeather(
-                'Erkner,de', // TODO user location
+                location,
                 (result) => {
                     Out.log('onResult', [result], 'finished: SetLocationIntent');
                     this.emit(':tell', result);

@@ -1,3 +1,5 @@
+import * as Out from './Logger';
+
 export class Wind {
 
     constructor(
@@ -23,6 +25,8 @@ export class Wind {
     }
 
     get windDirection(): string {
+        Out.log('windDirection', [this._degree.toString()]);
+
         if (isNumberInRange(this._degree, 22.5, 67.5))
             return 'NE';
         if (isNumberInRange(this._degree, 67.5, 112.5))
@@ -41,6 +45,8 @@ export class Wind {
     }
 
     get speedBft(): number {
+        Out.log('speedBft', [this._speedMs.toString()]);
+
         if (this._speedMs < 0.3)
             return 0;
         if (this._speedMs < 1.6)
