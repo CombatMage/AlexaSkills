@@ -1,0 +1,21 @@
+{
+  "name": "code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^7.0.18",
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0",
+    "typescript": "^2.3.2"
+  },
+  "dependencies": {
+    "alexa-sdk": "^1.0.9"
+  }
+}
