@@ -12,11 +12,16 @@ export function getCurrentForecast(
     onResult: (response: string) => any,
     onError: (any) => any) {
         Out.log('getCurrentForecast', [location]);
-        Request(formatRequest(location), (error, response, body) => {
+        let url = formatRequest(location);
+        Out.log('getCurrentForecast', [location], url);
+
+        Request(url, (error, response, body) => {
             if (error) {
+                Out.log('getCurrentForecast', [location], String(error));
                 onError(error);
             }
             else {
+                Out.log('getCurrentForecast', [location], String(body));
                 onResult(body);
             }
         });

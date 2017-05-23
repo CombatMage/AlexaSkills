@@ -6,6 +6,10 @@ export function parseToError(rawData: string): ApiError {
     Out.log('parseToError', [rawData])
     try {
         let object = JSON.parse(rawData);
+        let hasError = object.cod != '200';
+        if (!hasError) {
+            return null;
+        }
         return new ApiError(object.cod);
     }
     catch (exception) {

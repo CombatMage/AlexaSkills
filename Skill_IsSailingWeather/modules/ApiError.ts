@@ -9,4 +9,8 @@ export class ApiError {
     get isCityUnkown(): boolean {
         return this._errorCode == "404"
     }
+
+    public toString = () : string => {
+        return `ApiError (_errorCode: ${this._errorCode})`;
+    }
 }

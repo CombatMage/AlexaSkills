@@ -10,17 +10,23 @@ function handleIntentLaunch(onFinished) {
 }
 exports.handleIntentLaunch = handleIntentLaunch;
 function handleIntentIsSailingWeather(location, onFinished) {
+    Out.log('handleIntentIsSailingWeather', [location]);
     Api.getCurrentForecast(location, (result) => {
         let error = Parser.parseToError(result);
         if (error) {
+            Out.log('handleIntentIsSailingWeather', [location], 'received error ' + String(error));
             return handleApiError(location, error, onFinished);
         }
         let forecast = Parser.parseToForecast(result);
-        if (!forecast || forecast.length == 0)
+        if (!forecast || forecast.length == 0) {
+            Out.log('handleIntentIsSailingWeather', [location], 'no forecast available');
             return handleError(onFinished);
+        }
         let wind = Sailing.getWindFromForecast(forecast, Date.now());
-        if (!wind)
+        if (!wind) {
+            Out.log('handleIntentIsSailingWeather', [location], 'no wind data found');
             return handleError(onFinished);
+        }
         let output = Speak.getPositiveResponseForWindSpeed(wind.speedBft, location);
         onFinished(output);
     }, (error) => {
@@ -31,7 +37,7 @@ exports.handleIntentIsSailingWeather = handleIntentIsSailingWeather;
 function handleApiError(location, error, onResult) {
     Out.log('handleApiError', [error.toString()]);
     if (error.isCityUnkown) {
-        // TODO
+        onResult(Speak.getErrorForCityUnkown(location));
     }
     else {
         onResult(Speak.TELL_ERROR_UNKOWN);
