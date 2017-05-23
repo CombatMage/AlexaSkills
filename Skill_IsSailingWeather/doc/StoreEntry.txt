@@ -11,6 +11,6 @@ Du kannst Alexa nach der aktullen Wind-Wetterlage fragen.
 TODO
 
 Example Phrases:
-1. TODO
-2. TODO
-3. TODO
+1. Alexa öffne Segelwetter
+2. Alexa frage Segelwetter ob ich heute in Zeuthen gut segeln kann
+3. mein Segelrevier ist Köpenick

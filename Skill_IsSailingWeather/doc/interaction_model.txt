@@ -15,6 +15,7 @@
     {
       "name": "IsSailingWeatherIntent",
       "samples": [
+        "ob ich heute in {location} gut segeln kann",
         "ob heute Gutes Segelwetter ist",
         "wie ist der Wind",
         "ist der Wind gut",

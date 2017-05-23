@@ -1,5 +1,7 @@
 var Alexa = require('alexa-sdk');
 var Out = require('./Logger');
+var IntentHandler = require('./IntentHandler');
+
 
 Out.logginEnabled = true;
 
@@ -15,11 +17,14 @@ exports.handler = function(event, context, callback) {
 var handlers = {
     'LaunchRequest': function () {
         Out.log('LaunchRequest');
-
-        this.emit(':tell', 'TODO');
+        IntentHandler.handleLaunchIntent((toEmit, output) => {
+            this.emit(toEmit, output);
+        });
     },
-    'CustomIntent': function () {
-        Out.log('CustomIntent');
-        this.emit(':tell', 'TODO');
+    'ExplainSkillIntent': function () {
+        Out.log('ExplainSkillIntent');
+        IntentHandler.handleExplainSkillIntent((toEmit, output) => {
+            this.emit(toEmit, output);
+        });
     }
 };

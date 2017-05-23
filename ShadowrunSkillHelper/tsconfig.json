@@ -7,7 +7,7 @@
         "outDir": "./"
     },
     "include": [
-        "modules/**/*.ts"
+        "skill_modules/**/*.ts"
     ],
     "exclude": [
         "node_modules"
