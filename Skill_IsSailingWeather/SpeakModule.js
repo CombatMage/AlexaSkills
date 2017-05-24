@@ -1,8 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TELL_INTRO = `
+exports.ASK_INTRO = `
     Hallo wie kann ich dir helfen?
+`;
+exports.TELL_HELP = `
     Du kannst mich nach dem Wind in einer bestimmten Stadt fragen.
+    Sage Alexa wie ist der Wind in Berlin?
 `;
 exports.TELL_RESULT_STRENGTH = 'Aktuell herrscht Windstärke';
 exports.TELL_RESULT_DIRECTION = 'Der Wind kommt aus Richtung';
@@ -25,7 +28,7 @@ function getRepeatMessage() {
 }
 exports.getRepeatMessage = getRepeatMessage;
 function getLaunchMessage() {
-    return exports.TELL_INTRO;
+    return exports.ASK_INTRO;
 }
 exports.getLaunchMessage = getLaunchMessage;
 function getRequestForLocation() {
@@ -36,6 +39,10 @@ function getErrorForCityUnkown(location) {
     return `${exports.TELL_ERROR_CITY_NOT_FOUND} für ${location}`;
 }
 exports.getErrorForCityUnkown = getErrorForCityUnkown;
+function getResponseForHelp() {
+    return exports.TELL_HELP;
+}
+exports.getResponseForHelp = getResponseForHelp;
 function getPositiveResponseForWindSpeed(speed, location) {
     return `${exports.TELL_RESULT_STRENGTH} ${speed} in ${location}.`;
 }

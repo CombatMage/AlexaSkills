@@ -1,7 +1,10 @@
-export let TELL_INTRO = `
+export let ASK_INTRO = `
     Hallo wie kann ich dir helfen?
-    Du kannst mich nach dem Wind in einer bestimmten Stadt fragen.
 `;
+export let TELL_HELP = `
+    Du kannst mich nach dem Wind in einer bestimmten Stadt fragen.
+    Sage Alexa wie ist der Wind in Berlin?
+`
 
 export let TELL_RESULT_STRENGTH = 'Aktuell herrscht Windstärke';
 export let TELL_RESULT_DIRECTION = 'Der Wind kommt aus Richtung';
@@ -28,7 +31,7 @@ export function getRepeatMessage(): string {
 }
 
 export function getLaunchMessage(): string {
-    return TELL_INTRO;
+    return ASK_INTRO;
 }
 
 export function getRequestForLocation(): string {
@@ -37,6 +40,10 @@ export function getRequestForLocation(): string {
 
 export function getErrorForCityUnkown(location: string): string {
     return `${TELL_ERROR_CITY_NOT_FOUND} für ${location}`;
+}
+
+export function getResponseForHelp(): string {
+    return TELL_HELP;
 }
 
 export function getPositiveResponseForWindSpeed(

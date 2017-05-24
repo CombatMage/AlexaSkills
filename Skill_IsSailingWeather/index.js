@@ -29,7 +29,7 @@ var handlers = {
         );
     },
     'AMAZON.HelpIntent': function() {
-        this.emit(':tell', 'tesing');
+        this.emit(':tell', SpeakHandler.getResponseForHelp());
     },
     'IsSailingWeatherIntent': function () {
         Out.log('IsSailingWeatherIntent');
