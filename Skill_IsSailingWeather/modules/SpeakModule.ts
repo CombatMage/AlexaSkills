@@ -1,5 +1,7 @@
-export let TELL_INTRO = `Hallo, ich kann dir einen Wind Wetterbericht geben. 
-    Sage Alexa, wie ist der Wind in Berlin`;
+export let TELL_INTRO = `
+    Hallo wie kann ich dir helfen?
+    Du kannst mich nach dem Wind in einer bestimmten Stadt fragen.
+`;
 
 export let TELL_RESULT_STRENGTH = 'Aktuell herrscht Windstärke';
 export let TELL_RESULT_DIRECTION = 'Der Wind kommt aus Richtung';

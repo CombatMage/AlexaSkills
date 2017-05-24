@@ -27,8 +27,9 @@ function handleIntentIsSailingWeather(location, onFinished) {
             Out.log('handleIntentIsSailingWeather', [location], 'no wind data found');
             return handleError(onFinished);
         }
-        let output = Speak.getPositiveResponseForWindSpeed(wind.speedBft, location);
-        onFinished(output);
+        let response_strength = Speak.getPositiveResponseForWindSpeed(wind.speedBft, location);
+        let response_dir = Speak.getPositiveResponseForWindDirection(wind.windDirection);
+        onFinished(`${response_strength} ${response_dir}`);
     }, (error) => {
         return handleError(onFinished);
     });

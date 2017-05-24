@@ -22,12 +22,14 @@ exports.handler = function(event, context, callback) {
 var handlers = {
     'LaunchRequest': function () {
         Out.log('LaunchRequest');
-
         IntentHandler.handleIntentLaunch(
             (result) => {
-                this.emit(':tell', result);
+                this.emit(':ask', result, SpeakHandler.getRepeatMessage());
             }
         );
+    },
+    'AMAZON.HelpIntent': function() {
+        this.emit(':tell', 'tesing');
     },
     'IsSailingWeatherIntent': function () {
         Out.log('IsSailingWeatherIntent');
@@ -60,7 +62,7 @@ var handlers = {
                     this.emit(':tell', result);
                 }
             );
-        }
+        };
     },
     'SetLocationIntent': function() {
         Out.log('SetLocationIntent');

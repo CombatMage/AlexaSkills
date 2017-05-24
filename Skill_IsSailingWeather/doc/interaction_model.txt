@@ -21,6 +21,7 @@
         "ist der Wind gut",
         "wie schaut es mit dem Wind aus",
         "ist heute gutes Segel Wetter",
+        "ist heute gutes Surf Wetter",
         "kann ich heute gut Segeln",
         "Wie ist das Wetter",
         "Ist das Wetter gut",
@@ -34,7 +35,12 @@
         "ist in {location} guter Wind",
         "ist in {location} schlechter Wind",
         "ist in {location} gutes Segelwetter",
-        "ist in {location} schlechtes Segelwetter"
+        "ist in {location} schlechtes Segelwetter",
+        "wird es heute windig",
+        "zieht heute ein Storm auf",
+        "haben wir gerade Gegenwind",
+        "wird es windig sein in {location}",
+        "wird es in {location} windig sein"
       ],
       "slots": [
         {
@@ -65,7 +71,14 @@
         "am Liebsten segele ich in {location}",
         "ich segele am Liebsten in {location}",
         "in {location} segel ich am Liebsten",
-        "meist segele ich in {location}"
+        "meist segele ich in {location}",
+        "meine Liebliengs Segeltour ist {location}",
+        "ich bin schon einmal in {location} gekeentert",
+        "die Besten Wellen gibt es in "location",
+        "heute bin ich in {location} utnerwegs",
+        "ich möchte den Wind für {location}",
+        "ich möchte die Infos für {location}",
+        "ich möchte die Informationen für {location}"
       ],
       "slots": [
         {
