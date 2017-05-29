@@ -40,7 +40,9 @@
         "zieht heute ein Storm auf",
         "haben wir gerade Gegenwind",
         "wird es windig sein in {location}",
-        "wird es in {location} windig sein"
+        "wird es in {location} windig sein",
+        "wie wird das Wetter",
+        "wie wird das Wetter in {location} "
       ],
       "slots": [
         {
@@ -53,6 +55,8 @@
     {
       "name": "SetLocationIntent",
       "samples": [
+        "lege mein Segelreview auf {location} fest",
+        "setze mein Segelreview auf {location}",
         "ich segele in {location} ",
         "{location} ",
         "meine Stadt ist {location} ",
@@ -74,7 +78,7 @@
         "meist segele ich in {location}",
         "meine Liebliengs Segeltour ist {location}",
         "ich bin schon einmal in {location} gekeentert",
-        "die Besten Wellen gibt es in "location",
+        "die Besten Wellen gibt es in {location}",
         "heute bin ich in {location} utnerwegs",
         "ich möchte den Wind für {location}",
         "ich möchte die Infos für {location}",

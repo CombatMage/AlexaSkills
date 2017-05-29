@@ -2,42 +2,48 @@ Testing Instructions:
 Es wird kein weiterer Account und keine zusätzliche Hardware benötigt. 
 
 Der Skill bietet 2 Intents:
-1. Nach dem aktuellen Wind fragen
+
+1. Nach dem aktuellem Wind fragen
 Wenn die Stadt als Slot übergeben wird, erhält der Nutzer die Windstärke und Windrichtung für diese Stadt
 Bsp: Alexa frage Segelwetter nach dem Wind in Zeuthen
 
 Wenn keine Stadt als Slot übergeben wird, der Nutzer aber zuvor eine Stadt als Favorit angeben hat, erhält er die Informationen für diese Stadt
-Bsp: Alexa frage Segelwetter nach dem Wind
+Bsp: Alexa frage 'mein Segelwetter' nach dem Wind
 
 Wenn keine Stadt als Slot übergeben wird, der Nutzer zuvor auch keine Stadt als Favorit angeben hat, dann frag Alexa ihn nach einem Ort. 
-Bsp: Alexa frage Segelwetter nach dem Wind
+Bsp: Alexa frage 'mein Segelwetter' nach dem Wind
 Antwort: Wie lautet die am nächsten zu deinem See gelegene Stadt? Du kannst mir auch sagen in welcher Stadt du üblicherweise unterwegs bist.
 
 
 2. Favorisierte Stadt festlegen
 Der Nutzer kann die Stadt festlegen für die er den Wind wissen möchte. Der Nutzer erhält nach der Festlegung die Wind Informationen.
-Bsp: Alexa mein Segelrevier ist Köpenick
+Bsp: Alexa öffnen 'mein Segelwetter ' und lege mein Segelrevier auf Köpenick fest
+
+
+
+Fehler:
+Die Wetterinformationen werden von OpenWeatherMap bezogen. Wenn keine Daten für die übergebene Stadt abgerufen werden können, dann sollte Alexa antworten: „Tut mir Leid.Ich finde keine Daten für {Stadt}“
 
 
 
 Short Skill Description (160):
-Frage Alexa nach dem Wind in deiner Stadt.
+Frage Alexa nach der Windstärke und der Windrichtung.
 
 
 Full Skill Description:
-Segelwetter gibt dir die aktuelle Windstärke und Windrichtung für einen Ort. 
+Mein Segelwetter gibt dir die aktuelle Windstärke und Windrichtung.
 
 Die Wetterinformationen stammen von http://openweathermap.org/.
 
-Du kannst entweder nach der aktuellen Windsituation für eine Ort fragen. 
-    Alexa frage Segelwetter nach dem Wind in Zeuthen
+Du kannst entweder nach der aktuellen Windsituation für eine Ort fragen:
+    Alexa frage mein Segelwetter nach dem Wind in Zeuthen
 
-Du kannst auch dein übliches Segelgebiet festlegen.
-    Alexa mein Segelrevier ist Köpenick
-    Alexa frage Segelwetter nach dem Wind.
+Du kannst auch dein übliches Segelgebiet festlegen:
+    Alexa öffne mein Segelwetter und lege mein Segelrevier auf Köpenick fest
+    Alexa frage mein Segelwetter nach dem Wind
 
 
 Example Phrases:
-1. Alexa öffne Segelwetter
-2. Alexa frage Segelwetter nach dem Wind in Zeuthen
-3. mein Segelrevier ist Köpenick
+1. Alexa öffne mein Segelwetter
+2. Alexa frage mein Segelwetter nach dem Wind in Zeuthen
+3. Alexa öffne mein Segelwetter und lege mein Segelrevier auf Köpenick fest

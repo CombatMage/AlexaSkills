@@ -25,7 +25,7 @@ describe('Helper for language ouput', function() {
         it('should return the launch message, informing the user of possible actions', function() {
             response = unit.getLaunchMessage();
             expect(response).to.be.string;
-            expect(response).to.contain(unit.TELL_INTRO);
+            expect(response).to.contain(unit.ASK_INTRO);
         });
     });
 

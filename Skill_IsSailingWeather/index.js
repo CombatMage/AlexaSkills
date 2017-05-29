@@ -31,6 +31,12 @@ var handlers = {
     'AMAZON.HelpIntent': function() {
         this.emit(':tell', SpeakHandler.getResponseForHelp());
     },
+    'AMAZON.StopIntent': function() {
+        this.emit(':tell');
+    },
+    'AMAZON.CancelIntent': function() {
+        this.emit(':tell');
+    },
     'IsSailingWeatherIntent': function () {
         Out.log('IsSailingWeatherIntent');
 
