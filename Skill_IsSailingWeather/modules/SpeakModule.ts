@@ -1,11 +1,14 @@
 export let ASK_INTRO = `
-    Hallo, wie kann ich dir helfen?
+    Willkommen bei Segelwetter, wie kann ich dir helfen?
     Du kannst mich nach dem Wind in einer bestimmten Stadt fragen.
-    Sage Alexa wie ist der Wind in Berlin?
+    Sage Alexa, wie ist der Wind in Berlin?
 `;
-export let TELL_HELP = `
+export let ASK_HELP = `
     Du kannst mich nach dem Wind in einer bestimmten Stadt fragen.
-    Sage Alexa wie ist der Wind in Berlin?
+    Sage Alexa, wie ist der Wind in Berlin?
+    Du kannst auch dein bevorzugtes Segelrevier festlegen.
+    Sage Alexa, lege mein Segelrevier auf Berlin fest.
+    Was möchtest du tun?
 `;
 
 export let TELL_RESULT_STRENGTH = "Aktuell herrscht Windstärke";
@@ -45,7 +48,7 @@ export function getErrorForCityUnkown(location: string): string {
 }
 
 export function getResponseForHelp(): string {
-    return TELL_HELP;
+    return ASK_HELP;
 }
 
 export function getPositiveResponseForWindSpeed(

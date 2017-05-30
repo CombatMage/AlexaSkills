@@ -1,13 +1,14 @@
 var Alexa = require('alexa-sdk');
 
-var Out = require('./Logger');
+var Winston = require('winston');
+Winston.level = 'info';
+const info = Winston.info;
+const error = Winston.error;
+
 var SpeakHandler = require('./SpeakModule');
 var IntentHandler = require('./IntentModule');
 
 var tbNameLocation = 'tbNameLocation'
-
-
-Out.logginEnabled = true;
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -21,32 +22,35 @@ exports.handler = function(event, context, callback) {
 
 var handlers = {
     'LaunchRequest': function () {
-        Out.log('LaunchRequest');
+        info('LaunchRequest');
         IntentHandler.handleIntentLaunch(
             (result) => {
+                info('on LaunchRequest finished with ' + result);
                 this.emit(':ask', result, SpeakHandler.getRepeatMessage());
             }
         );
     },
     'AMAZON.HelpIntent': function() {
-        this.emit(':tell', SpeakHandler.getResponseForHelp());
+        info('AMAZON.HelpIntent');
+        this.emit(':ask', SpeakHandler.getResponseForHelp());
     },
     'AMAZON.StopIntent': function() {
+        info('AMAZON.StopIntent');
         this.emit(':tell');
     },
     'AMAZON.CancelIntent': function() {
+        info('AMAZON.CancelIntent');
         this.emit(':tell');
     },
     'IsSailingWeatherIntent': function () {
-        Out.log('IsSailingWeatherIntent');
+        info('IsSailingWeatherIntent');
 
         // check if slot for location is set
         var location = undefined;
         try {
             location = this.event.request.intent.slots.location.value;
-        }
-        catch (error) {
-            Out.log('IsSailingWeatherIntent', [], 'no slot for location given');
+        } catch (error) {
+            info('IsSailingWeatherIntent: no slot for location given');
         }
 
         // check if user has set his favourite location before
@@ -56,42 +60,43 @@ var handlers = {
 
         // else ask the user for his location
         if (!location) {
-            Out.log('IsSailingWeatherIntent', [], 'no location was given, ask the user');
+            error('IsSailingWeatherIntent: no favourite location was set');
             this.emit(':ask', SpeakHandler.getRequestForLocation(), SpeakHandler.getRepeatMessage());
         }
         else {
-            Out.log('IsSailingWeatherIntent', [location], 'get data from OpenWeatherMap');
+            info('IsSailingWeatherIntent: getting weather information for ' + location);
             IntentHandler.handleIntentIsSailingWeather(
                 location,
                 (result) => {
-                    Out.log('onResult', [result], 'finished: IsSailingWeatherIntent');
+                    info('on IsSailingWeatherIntent finished with ' + result);
                     this.emit(':tell', result);
                 }
             );
         };
     },
     'SetLocationIntent': function() {
-        Out.log('SetLocationIntent');
+        info('on SetLocationIntent');
 
         // check if slot for location is set
         var location = undefined;
         try {
             location = this.event.request.intent.slots.location.value;
-        }
-        catch (error) {
-            Out.log('SetLocationIntent', [], 'no slot for location given');
+        } catch (error) {
+            error('SetLocationIntent: slot for location was set');
         }
 
+        // else ask the user for his location
         if (!location) {
-            this.emit(':tell', SpeakHandler.getRepeatMessage());
+            this.emit(':ask', SpeakHandler.getRepeatMessage());
         }
         else {
-            Out.log('SetLocationIntent', [location], 'get data from OpenWeatherMap');
+            info('SetLocationIntent: write ' + location + ' to database');
             this.attributes[tbNameLocation] = location;
+            info('SetLocationIntent: getting weather information for ' + location);
             IntentHandler.handleIntentIsSailingWeather(
                 location,
                 (result) => {
-                    Out.log('onResult', [result], 'finished: SetLocationIntent');
+                    info('SetLocationIntent finished with ' + result);
                     this.emit(':tell', result);
                 }
             );

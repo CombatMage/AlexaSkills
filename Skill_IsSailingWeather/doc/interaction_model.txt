@@ -42,7 +42,8 @@
         "wird es windig sein in {location}",
         "wird es in {location} windig sein",
         "wie wird das Wetter",
-        "wie wird das Wetter in {location} "
+        "wie wird das Wetter in {location}",
+        "dem Wind in {location}"
       ],
       "slots": [
         {
@@ -55,12 +56,12 @@
     {
       "name": "SetLocationIntent",
       "samples": [
-        "lege mein Segelreview auf {location} fest",
-        "setze mein Segelreview auf {location}",
-        "ich segele in {location} ",
-        "{location} ",
-        "meine Stadt ist {location} ",
-        "ich will das Wetter für {location} ",
+        "lege mein Segelrevier auf {location} fest",
+        "setze mein Segelrevier auf {location}",
+        "ich segel in {location}",
+        "{location}",
+        "meine Stadt ist {location}",
+        "ich will das Wetter für {location}",
         "die nächste Stadt ist {location}",
         "die am nächsten gelegene Stadt ist {location}",
         "mein See liegt in {location}",

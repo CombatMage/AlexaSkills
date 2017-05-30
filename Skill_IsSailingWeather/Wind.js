@@ -2,68 +2,87 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Out = require("./Logger");
 class Wind {
-    constructor(_speedMs, _degree, _timeUnix, _timeHuman) {
-        this._speedMs = _speedMs;
-        this._degree = _degree;
-        this._timeUnix = _timeUnix;
-        this._timeHuman = _timeHuman;
+    constructor(mSpeedMs, mDegree, mTimeUnix, mTimeHuman) {
+        this.mSpeedMs = mSpeedMs;
+        this.mDegree = mDegree;
+        this.mTimeUnix = mTimeUnix;
+        this.mTimeHuman = mTimeHuman;
     }
     get speedMs() {
-        return this._speedMs;
+        return this.mSpeedMs;
     }
     get degree() {
-        return this._degree;
+        return this.mDegree;
     }
     get timeUnix() {
-        return this._timeUnix;
+        return this.mTimeUnix;
     }
     get timeHuman() {
-        return this._timeHuman;
+        return this.mTimeHuman;
     }
     get windDirection() {
-        Out.log('windDirection', [this._degree.toString()]);
-        if (isNumberInRange(this._degree, 22.5, 67.5))
-            return 'NE';
-        if (isNumberInRange(this._degree, 67.5, 112.5))
-            return 'E';
-        if (isNumberInRange(this._degree, 112.5, 157.5))
-            return 'SE';
-        if (isNumberInRange(this._degree, 157.5, 202.5))
-            return 'S';
-        if (isNumberInRange(this._degree, 202.5, 247.5))
-            return 'SW';
-        if (isNumberInRange(this._degree, 247.5, 292.5))
-            return 'W';
-        if (isNumberInRange(this._degree, 292.5, 337.5))
-            return 'NW';
-        return 'N';
+        Out.log("windDirection", [this.mDegree.toString()]);
+        if (isNumberInRange(this.mDegree, 22.5, 67.5)) {
+            return "NE";
+        }
+        else if (isNumberInRange(this.mDegree, 67.5, 112.5)) {
+            return "E";
+        }
+        else if (isNumberInRange(this.mDegree, 112.5, 157.5)) {
+            return "SE";
+        }
+        else if (isNumberInRange(this.mDegree, 157.5, 202.5)) {
+            return "S";
+        }
+        else if (isNumberInRange(this.mDegree, 202.5, 247.5)) {
+            return "SW";
+        }
+        else if (isNumberInRange(this.mDegree, 247.5, 292.5)) {
+            return "W";
+        }
+        else if (isNumberInRange(this.mDegree, 292.5, 337.5)) {
+            return "NW";
+        }
+        return "N";
     }
     get speedBft() {
-        Out.log('speedBft', [this._speedMs.toString()]);
-        if (this._speedMs < 0.3)
+        Out.log("speedBft", [this.mSpeedMs.toString()]);
+        if (this.mSpeedMs < 0.3) {
             return 0;
-        if (this._speedMs < 1.6)
+        }
+        else if (this.mSpeedMs < 1.6) {
             return 1;
-        if (this._speedMs < 3.4)
+        }
+        else if (this.mSpeedMs < 3.4) {
             return 2;
-        if (this._speedMs < 5.5)
+        }
+        else if (this.mSpeedMs < 5.5) {
             return 3;
-        if (this._speedMs < 8.0)
+        }
+        else if (this.mSpeedMs < 8.0) {
             return 4;
-        if (this._speedMs < 10.8)
+        }
+        else if (this.mSpeedMs < 10.8) {
             return 5;
-        if (this._speedMs < 13.9)
+        }
+        else if (this.mSpeedMs < 13.9) {
             return 6;
-        if (this._speedMs < 17.2)
+        }
+        else if (this.mSpeedMs < 17.2) {
             return 7;
-        if (this._speedMs < 20.8)
+        }
+        else if (this.mSpeedMs < 20.8) {
             return 8;
-        if (this._speedMs < 24.5)
+        }
+        else if (this.mSpeedMs < 24.5) {
             return 9;
-        if (this._speedMs < 28.5)
+        }
+        else if (this.mSpeedMs < 28.5) {
             return 10;
-        if (this._speedMs < 32.7)
+        }
+        else if (this.mSpeedMs < 32.7) {
             return 11;
+        }
         return 12;
     }
 }

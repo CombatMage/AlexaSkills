@@ -1,13 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ASK_INTRO = `
-    Hallo, wie kann ich dir helfen?
+    Willkommen bei Segelwetter, wie kann ich dir helfen?
     Du kannst mich nach dem Wind in einer bestimmten Stadt fragen.
-    Sage Alexa wie ist der Wind in Berlin?
+    Sage Alexa, wie ist der Wind in Berlin?
 `;
-exports.TELL_HELP = `
+exports.ASK_HELP = `
     Du kannst mich nach dem Wind in einer bestimmten Stadt fragen.
-    Sage Alexa wie ist der Wind in Berlin?
+    Sage Alexa, wie ist der Wind in Berlin?
+    Du kannst auch dein bevorzugtes Segelrevier festlegen.
+    Sage Alexa, lege mein Segelrevier auf Berlin fest.
+    Was möchtest du tun?
 `;
 exports.TELL_RESULT_STRENGTH = "Aktuell herrscht Windstärke";
 exports.TELL_RESULT_DIRECTION = "Der Wind kommt aus Richtung";
@@ -42,7 +45,7 @@ function getErrorForCityUnkown(location) {
 }
 exports.getErrorForCityUnkown = getErrorForCityUnkown;
 function getResponseForHelp() {
-    return exports.TELL_HELP;
+    return exports.ASK_HELP;
 }
 exports.getResponseForHelp = getResponseForHelp;
 function getPositiveResponseForWindSpeed(speed, location) {
