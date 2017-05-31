@@ -1,36 +1,35 @@
-var expect = require('chai').expect;
-var parserModule = require('../ParserModule');
+import { expect } from "chai";
+import { parseToForecast, parseToError } from "../modules/ParserModule";
 
-describe('Parser for OpenWeatherApi', function() {
-    describe('parseToForecast', function() {
-        it('should return null for empty json', function() {
-            var result = parserModule.parseToForecast('{}');
-            expect(result).to.be.null
+describe("Parser for OpenWeatherApi", () => {
+    describe("parseToForecast", () => {
+        it("should return null for empty json", () => {
+            const result = parseToForecast("{}");
+            expect(result).to.be.null;
         });
-        it('should return list of wind for test data', function() {
-            var result = parserModule.parseToForecast(testData);
-            expect(result).to.have.length.of(37);
-
+        it("should return list of wind for test data", () => {
+            const result = parseToForecast(testData);
+            expect(result.length).to.be.equal(37);
             expect(result[0].speedMs).to.be.eql(5.87);
             expect(result[0].degree).to.be.eql(150);
             expect(result[0].timeUnix).to.be.eql(1495098000);
             expect(result[0].timeHuman).to.be.eql("2017-05-18 09:00:00");
         });
     });
-    describe('parseToError', function() {
-        it('should parse json to error', function() {
-            let error = parserModule.parseToError(testDataError);
-            expect(error.errorCode).to.be.eql('404');
+    describe("parseToError", () => {
+        it("should parse json to error", () => {
+            const error = parseToError(testDataError);
+            expect(error.errorCode).to.be.eql("404");
         });
     });
 });
 
-let testDataError = `{
+const testDataError = `{
     "cod": "404",
     "message": "city not found"
 }`;
 
-let testData = `{
+const testData = `{
     "cod": "200",
     "message": 0.0025,
     "cnt": 37,

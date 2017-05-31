@@ -11,11 +11,13 @@
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "^3.5.2",
+    "@types/chai-http": "0.0.30",
     "@types/mocha": "^2.2.41",
     "@types/node": "^7.0.18",
     "@types/request": "0.0.43",
     "@types/winston": "^2.3.2",
     "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "mocha": "^3.3.0",
     "ts-node": "^3.0.4",
     "typescript": "^2.3.2"
