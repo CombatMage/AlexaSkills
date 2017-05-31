@@ -1,17 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class ApiError {
-    constructor(_errorCode) {
-        this._errorCode = _errorCode;
+    constructor(mErrorCode) {
+        this.mErrorCode = mErrorCode;
         this.toString = () => {
-            return `ApiError (_errorCode: ${this._errorCode})`;
+            return `ApiError (_errorCode: ${this.mErrorCode})`;
         };
     }
     get errorCode() {
-        return this._errorCode;
+        return this.mErrorCode;
     }
     get isCityUnkown() {
-        return this._errorCode == "404";
+        return this.mErrorCode === "404";
     }
 }
 exports.ApiError = ApiError;

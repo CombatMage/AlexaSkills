@@ -1,32 +1,31 @@
-import * as Request from 'request';
+import * as Request from "request";
+import { info, error } from "winston";
 
-import * as Out from './Logger';
+const host = "api.openweathermap.org";
+const endpoint = "/data/2.5/forecast";
 
-let host = 'api.openweathermap.org';
-let endpoint = '/data/2.5/forecast';
-
-let apiKey = 'd0d0ebd199dd630ef800a557ef427882';
+const apiKey = "d0d0ebd199dd630ef800a557ef427882";
+const timeoutMillis = 2000;
 
 export function getCurrentForecast(
     location: string,
     onResult: (response: string) => any,
-    onError: (any) => any) {
-        Out.log('getCurrentForecast', [location]);
-        let url = formatRequest(location);
-        Out.log('getCurrentForecast', [location], url);
+    onError: (apiError: any) => any) {
+        info("getCurrentForecast: location is " + location);
 
-        Request(url, (error, response, body) => {
-            if (error) {
-                Out.log('getCurrentForecast', [location], String(error));
+        const url = formatRequest(location);
+        info("getCurrentForecast: using request " + url);
+        Request(url, {timeout: timeoutMillis}, (apiError, response, body) => {
+            if (apiError) {
+                error("getCurrentForecast: received error " + apiError);
                 onError(error);
-            }
-            else {
-                Out.log('getCurrentForecast', [location], String(body));
+            } else {
+                info("getCurrentForecast: received response " + body);
                 onResult(body);
             }
         });
 }
 
 function formatRequest(location: string): string {
-    return `http://${host}${endpoint}?q=${location}&appid=${apiKey}&units=metric`
+    return `http://${host}${endpoint}?q=${location}&appid=${apiKey}&units=metric`;
 }

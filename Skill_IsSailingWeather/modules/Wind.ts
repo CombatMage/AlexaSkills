@@ -1,4 +1,4 @@
-import * as Out from "./Logger";
+import {info, error} from "winston";
 
 export class Wind {
 
@@ -25,7 +25,7 @@ export class Wind {
     }
 
     get windDirection(): string {
-        Out.log("windDirection", [this.mDegree.toString()]);
+        info("windDirection: for degree: " + this.mDegree);
 
         if (isNumberInRange(this.mDegree, 22.5, 67.5)) {
             return "NE";
@@ -46,7 +46,7 @@ export class Wind {
     }
 
     get speedBft(): number {
-        Out.log("speedBft", [this.mSpeedMs.toString()]);
+        info("speedBft: for speed: " + this.mSpeedMs);
 
         if (this.mSpeedMs < 0.3) {
             return 0;

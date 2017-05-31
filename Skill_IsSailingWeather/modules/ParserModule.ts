@@ -1,47 +1,43 @@
-import * as Out from './Logger';
-import { Wind } from './Wind';
-import { ApiError } from './ApiError';
+import { info, error } from "winston";
+import { Wind } from "./Wind";
+import { ApiError } from "./ApiError";
 
 export function parseToError(rawData: string): ApiError {
-    Out.log('parseToError', [rawData])
+    info("parseToError: checking data for error " + rawData);
     try {
-        let object = JSON.parse(rawData);
-        let hasError = object.cod != '200';
+        const object = JSON.parse(rawData);
+        const hasError = object.cod !== "200";
         if (!hasError) {
             return null;
         }
         return new ApiError(object.cod);
-    }
-    catch (exception) {
-        Out.log('parseToError', [rawData], String(exception));
+    } catch (exception) {
+        info("parseToError: no error was found");
         return null;
     }
 }
 
-export function parseToForecast(rawData: string): Array<Wind> {
-    Out.log('parseToForecast', [rawData])
+export function parseToForecast(rawData: string): Wind[] {
+    info("parseToForecast: parsing " + rawData + " to forecast");
     try {
-        let object = JSON.parse(rawData);
+        const object = JSON.parse(rawData);
 
-        let count = object.cnt;
-        if (!count) 
+        const count = object.cnt;
+        if (!count) {
             return null;
-
-        let result = new Array<Wind>();
-        for (let windObject of object.list) {
-
-            let speedMs = windObject.wind.speed;
-            let degree = windObject.wind.deg;
-            let timeUnix = windObject.dt;
-            let timeHuman = windObject.dt_txt;
-
-            result.push(new Wind(speedMs, degree, timeUnix, timeHuman));
         }
 
+        const result = new Array<Wind>();
+        for (const windObject of object.list) {
+            const speedMs = windObject.wind.speed;
+            const degree = windObject.wind.deg;
+            const timeUnix = windObject.dt;
+            const timeHuman = windObject.dt_txt;
+            result.push(new Wind(speedMs, degree, timeUnix, timeHuman));
+        }
         return result;
-    }
-    catch (exception) {
-        Out.log('parseToForecast', [rawData], String(exception));
+    } catch (exception) {
+        error("parseToForecast: parsing failed with " + exception);
         return null;
     }
 }

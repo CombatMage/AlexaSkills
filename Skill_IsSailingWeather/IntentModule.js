@@ -1,30 +1,31 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Out = require("./Logger");
+const winston_1 = require("winston");
 const Api = require("./ApiModule");
 const Parser = require("./ParserModule");
 const Sailing = require("./IsSailingModule");
 const Speak = require("./SpeakModule");
 function handleIntentLaunch(onFinished) {
+    winston_1.info("handleIntentLaunch");
     onFinished(Speak.getLaunchMessage());
 }
 exports.handleIntentLaunch = handleIntentLaunch;
 function handleIntentIsSailingWeather(location, onFinished) {
-    Out.log("handleIntentIsSailingWeather", [location]);
+    winston_1.info("handleIntentIsSailingWeather: location is " + location);
     Api.getCurrentForecast(location, (result) => {
-        const error = Parser.parseToError(result);
-        if (error) {
-            Out.log("handleIntentIsSailingWeather", [location], "received error " + String(error));
-            return handleApiError(location, error, onFinished);
+        const apiError = Parser.parseToError(result);
+        if (apiError) {
+            winston_1.error("handleIntentIsSailingWeather: received error from api: " + apiError.toString());
+            return handleApiError(location, apiError, onFinished);
         }
         const forecast = Parser.parseToForecast(result);
         if (!forecast || forecast.length === 0) {
-            Out.log("handleIntentIsSailingWeather", [location], "no forecast available");
+            winston_1.error("handleIntentIsSailingWeather: no forecast was received from api");
             return handleError(onFinished);
         }
         const wind = Sailing.getWindFromForecast(forecast, Date.now());
         if (!wind) {
-            Out.log("handleIntentIsSailingWeather", [location], "no wind data found");
+            winston_1.error("handleIntentIsSailingWeather: no data was received from forecast");
             return handleError(onFinished);
         }
         const responseStrength = Speak.getPositiveResponseForWindSpeed(wind.speedBft, location);
@@ -36,7 +37,7 @@ function handleIntentIsSailingWeather(location, onFinished) {
 }
 exports.handleIntentIsSailingWeather = handleIntentIsSailingWeather;
 function handleApiError(location, error, onResult) {
-    Out.log("handleApiError", [error.toString()]);
+    winston_1.info("handleApiError: error is " + error.toString());
     if (error.isCityUnkown) {
         onResult(Speak.getErrorForCityUnkown(location));
     }
@@ -45,7 +46,7 @@ function handleApiError(location, error, onResult) {
     }
 }
 function handleError(onResult) {
-    Out.log("handleError");
+    winston_1.info("handleError");
     onResult(Speak.TELL_ERROR_UNKOWN);
 }
 //# sourceMappingURL=IntentModule.js.map

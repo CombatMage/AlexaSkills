@@ -1,43 +1,44 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Out = require("./Logger");
+const winston_1 = require("winston");
 const Wind_1 = require("./Wind");
 const ApiError_1 = require("./ApiError");
 function parseToError(rawData) {
-    Out.log('parseToError', [rawData]);
+    winston_1.info("parseToError: checking data for error " + rawData);
     try {
-        let object = JSON.parse(rawData);
-        let hasError = object.cod != '200';
+        const object = JSON.parse(rawData);
+        const hasError = object.cod !== "200";
         if (!hasError) {
             return null;
         }
         return new ApiError_1.ApiError(object.cod);
     }
     catch (exception) {
-        Out.log('parseToError', [rawData], String(exception));
+        winston_1.info("parseToError: no error was found");
         return null;
     }
 }
 exports.parseToError = parseToError;
 function parseToForecast(rawData) {
-    Out.log('parseToForecast', [rawData]);
+    winston_1.info("parseToForecast: parsing " + rawData + " to forecast");
     try {
-        let object = JSON.parse(rawData);
-        let count = object.cnt;
-        if (!count)
+        const object = JSON.parse(rawData);
+        const count = object.cnt;
+        if (!count) {
             return null;
-        let result = new Array();
-        for (let windObject of object.list) {
-            let speedMs = windObject.wind.speed;
-            let degree = windObject.wind.deg;
-            let timeUnix = windObject.dt;
-            let timeHuman = windObject.dt_txt;
+        }
+        const result = new Array();
+        for (const windObject of object.list) {
+            const speedMs = windObject.wind.speed;
+            const degree = windObject.wind.deg;
+            const timeUnix = windObject.dt;
+            const timeHuman = windObject.dt_txt;
             result.push(new Wind_1.Wind(speedMs, degree, timeUnix, timeHuman));
         }
         return result;
     }
     catch (exception) {
-        Out.log('parseToForecast', [rawData], String(exception));
+        winston_1.error("parseToForecast: parsing failed with " + exception);
         return null;
     }
 }

@@ -1,4 +1,5 @@
-import * as Out from "./Logger";
+import { info, error } from "winston";
+
 import * as Api from "./ApiModule";
 import * as Parser from "./ParserModule";
 import * as Sailing from "./IsSailingModule";
@@ -6,33 +7,33 @@ import * as Speak from "./SpeakModule";
 import { ApiError } from "./ApiError";
 
 export function handleIntentLaunch(onFinished: (message: string) => any) {
+    info("handleIntentLaunch");
     onFinished(Speak.getLaunchMessage());
 }
 
 export function handleIntentIsSailingWeather(
     location: string,
     onFinished: (message: string) => any) {
-    Out.log("handleIntentIsSailingWeather", [location]);
 
+    info("handleIntentIsSailingWeather: location is " + location);
     Api.getCurrentForecast(
         location,
         (result) => {
-            const error = Parser.parseToError(result);
-            if (error) {
-                Out.log("handleIntentIsSailingWeather", [location], "received error " + String(error));
-                return handleApiError(location, error, onFinished);
+            const apiError = Parser.parseToError(result);
+            if (apiError) {
+                error("handleIntentIsSailingWeather: received error from api: " + apiError.toString());
+                return handleApiError(location, apiError, onFinished);
             }
 
             const forecast = Parser.parseToForecast(result);
-            if (!forecast || forecast.length === 0)
-            {
-                Out.log("handleIntentIsSailingWeather", [location], "no forecast available");
+            if (!forecast || forecast.length === 0) {
+                error("handleIntentIsSailingWeather: no forecast was received from api");
                 return handleError(onFinished);
             }
 
             const wind = Sailing.getWindFromForecast(forecast, Date.now());
             if (!wind) {
-                Out.log("handleIntentIsSailingWeather", [location], "no wind data found");
+                error("handleIntentIsSailingWeather: no data was received from forecast");
                 return handleError(onFinished);
             }
 
@@ -43,13 +44,12 @@ export function handleIntentIsSailingWeather(
         },
         (error) => {
             return handleError(onFinished);
-        }
-    )
+        },
+    );
 }
 
 function handleApiError(location: string, error: ApiError, onResult: (message: string) => any) {
-    Out.log("handleApiError", [error.toString()]);
-
+    info("handleApiError: error is " + error.toString());
     if (error.isCityUnkown) {
         onResult(Speak.getErrorForCityUnkown(location));
     } else {
@@ -58,6 +58,6 @@ function handleApiError(location: string, error: ApiError, onResult: (message: s
 }
 
 function handleError(onResult: (message: string) => any) {
-    Out.log("handleError");
+    info("handleError");
     onResult(Speak.TELL_ERROR_UNKOWN);
 }

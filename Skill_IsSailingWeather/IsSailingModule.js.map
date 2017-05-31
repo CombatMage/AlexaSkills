@@ -1,1 +1,1 @@
-{"version":3,"file":"IsSailingModule.js","sourceRoot":"","sources":["modules/IsSailingModule.ts"],"names":[],"mappings":";;AAEA,6BAAoC,QAAqB,EAAE,SAAiB;IACxE,MAAM,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC;AACvB,CAAC;AAFD,kDAEC"}
+{"version":3,"file":"IsSailingModule.js","sourceRoot":"","sources":["modules/IsSailingModule.ts"],"names":[],"mappings":";;AAEA,6BAAoC,QAAgB,EAAE,SAAiB;IACnE,MAAM,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC;AACvB,CAAC;AAFD,kDAEC"}
