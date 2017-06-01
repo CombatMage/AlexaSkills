@@ -4,8 +4,8 @@ var logger = require('./logger.module');
 const info = logger.info;
 const error = logger.error;
 
-var SpeakHandler = require('./SpeakModule');
-var IntentHandler = require('./IntentModule');
+var SpeakHandler = require('./speak.module');
+var IntentHandler = require('./intent.module');
 
 var tbNameLocation = 'tbNameLocation'
 

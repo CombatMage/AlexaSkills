@@ -7,16 +7,14 @@ const assert = chai.assert;
 process.env.NODE_ENV = "test";
 
 describe("OpenWeatherApi", () => {
-    describe("get forecast", () => {
+    describe("getCurrentForecast", () => {
         it("returns the current current forecast as json", () => {
-            getCurrentForecast(
-                "Berlin,de",
-                (result) => {
-                    expect(result).to.be.json;
-                },
-                (error) => {
-                    assert.fail("error: " + error);
-                });
+            getCurrentForecast("Berlin").then((res) => {
+                expect(res).to.be.json;
+                expect(res).to.be.not.null;
+            }).catch((error) => {
+                assert.fail("error: " + error);
+            });
         });
     });
 });

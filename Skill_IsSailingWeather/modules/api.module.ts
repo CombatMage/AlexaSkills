@@ -7,23 +7,21 @@ const endpoint = "/data/2.5/forecast";
 const apiKey = "d0d0ebd199dd630ef800a557ef427882";
 const timeoutMillis = 2000;
 
-export function getCurrentForecast(
-    location: string,
-    onResult: (response: string) => any,
-    onError: (apiError: any) => any) {
-        info("getCurrentForecast: location is " + location);
+export function getCurrentForecast(location: string): Promise<string> {
+    info("getCurrentForecast: location is " + location);
 
-        const url = formatRequest(location);
-        info("getCurrentForecast: using request " + url);
-        Request(url, {timeout: timeoutMillis}, (apiError, response, body) => {
-            if (apiError) {
-                error("getCurrentForecast: received error " + apiError);
-                onError(error);
+    const url = formatRequest(location);
+    return new Promise((fullfill, reject) => {
+        Request(url, {timeout: timeoutMillis}, (error, response, body) => {
+            if (error) {
+                error("getCurrentForecast: received error " + error);
+                reject(error);
             } else {
                 info("getCurrentForecast: received response " + body);
-                onResult(body);
+                fullfill(body);
             }
         });
+    });
 }
 
 function formatRequest(location: string): string {
