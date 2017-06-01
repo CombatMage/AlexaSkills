@@ -5,7 +5,6 @@ process.env.NODE_ENV = "test";
 
 describe("Wind", () => {
     describe("should convert wind speed from m/s to beauford", () => {
-
         it("should return 0 for speed < 0.3", () => {
             let wind = new Wind(0, 0, undefined, undefined);
             expect(wind.speedBft).to.be.eql(0);
@@ -104,6 +103,35 @@ describe("Wind", () => {
         it("should return SW for wind from 230 degree", () => {
             const wind = new Wind(32.7, 230, undefined, undefined);
             expect(wind.windDirection).to.be.eql("SW");
+        });
+    });
+    describe("isToday", () => {
+        it("should return true", () => {
+            const wind = new Wind(undefined, undefined, undefined, "2017-04-18 12:00:00");
+            expect(wind.isOnDate("2017-04-18")).to.be.equal(true);
+        });
+        it("should return false", () => {
+            const today = new Date().getDay();
+            const wind = new Wind(undefined, undefined, undefined, "2017-04-18 12:00:00");
+            expect(wind.isOnDate("2017-04-19")).to.be.equal(false);
+        });
+    });
+    describe("getTimeDiffMinutes", () => {
+        it("should return 0", () => {
+            const wind = new Wind(undefined, undefined, undefined, "2017-05-18 12:00:00");
+            expect(wind.getTimeDiffMinutes("12:00")).to.be.equal(0);
+        });
+        it("should return 15", () => {
+            const wind = new Wind(undefined, undefined, undefined, "2017-05-18 12:00:00");
+            expect(wind.getTimeDiffMinutes("12:15")).to.be.equal(15);
+        });
+        it("should return 60", () => {
+            const wind = new Wind(undefined, undefined, undefined, "2017-05-18 12:00:00");
+            expect(wind.getTimeDiffMinutes("11:00")).to.be.equal(60);
+        });
+        it("should return 90", () => {
+            const wind = new Wind(undefined, undefined, undefined, "2017-05-18 12:00:00");
+            expect(wind.getTimeDiffMinutes("11:30")).to.be.equal(90);
         });
     });
 });

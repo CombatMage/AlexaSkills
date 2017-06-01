@@ -11,50 +11,50 @@ export function handleIntentLaunch(onFinished: (message: string) => any) {
     onFinished(Speak.getLaunchMessage());
 }
 
-export function handleIntentIsSailingWeather(location: string, onFinished: (message: string) => any) {
+export function handleIntentIsSailingWeather(location: string): Promise<string> {
     info("handleIntentIsSailingWeather: location is " + location);
 
-    getCurrentForecast(location).then((res) => {
-        handleResponse(location, res, onFinished);
+    return getCurrentForecast(location).then((res) => {
+        return handleResponse(location, res);
     }).catch((error) => {
-        handleError(onFinished);
+        return handleError();
     });
 }
 
-function handleResponse(requestedLocation: string, response: string, onFinished: (message: string) => any) {
+function handleResponse(requestedLocation: string, response: string): string {
     const apiError = Parser.parseToError(response);
     if (apiError) {
         error("handleIntentIsSailingWeather: received error from api: " + apiError.toString());
-        handleApiError(requestedLocation, apiError, onFinished);
+        return handleApiError(requestedLocation, apiError);
     } else {
-        const forecast = Parser.parseToForecast(requestedLocation);
+        const forecast = Parser.parseToForecast(response);
         if (!forecast || forecast.length === 0) {
             error("handleIntentIsSailingWeather: no forecast was received from api");
-            handleError(onFinished);
+            return handleError();
         } else {
-            const wind = Sailing.getWindFromForecast(forecast, Date.now());
+            const wind = Sailing.getWindFromForecast(forecast, "");
             if (!wind) {
                 error("handleIntentIsSailingWeather: no data was received from forecast");
-                handleError(onFinished);
+                return handleError();
             } else {
                 const responseStrength = Speak.getPositiveResponseForWindSpeed(wind.speedBft, requestedLocation);
                 const responseDir = Speak.getPositiveResponseForWindDirection(wind.windDirection);
-                onFinished(`${responseStrength} ${responseDir}`);
+                return `${responseStrength} ${responseDir}`;
             }
         }
     }
 }
 
-function handleApiError(location: string, error: ApiError, onResult: (message: string) => any) {
+function handleApiError(location: string, error: ApiError): string {
     info("handleApiError: error is " + error.toString());
     if (error.isCityUnkown) {
-        onResult(Speak.getErrorForCityUnkown(location));
+        return Speak.getErrorForCityUnkown(location);
     } else {
-        onResult(Speak.TELL_ERROR_UNKOWN);
+        return Speak.TELL_ERROR_UNKOWN;
     }
 }
 
-function handleError(onResult: (message: string) => any) {
+function handleError(): string {
     info("handleError");
-    onResult(Speak.TELL_ERROR_UNKOWN);
+    return Speak.TELL_ERROR_UNKOWN;
 }

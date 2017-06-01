@@ -64,13 +64,11 @@ var handlers = {
         }
         else {
             info('IsSailingWeatherIntent: getting weather information for ' + location);
-            IntentHandler.handleIntentIsSailingWeather(
-                location,
-                (result) => {
+            IntentHandler.handleIntentIsSailingWeather(location)
+                .then((res) => {
                     info('on IsSailingWeatherIntent finished with ' + result);
                     this.emit(':tell', result);
-                }
-            );
+                });
         };
     },
     'SetLocationIntent': function() {
@@ -92,13 +90,11 @@ var handlers = {
             info('SetLocationIntent: write ' + location + ' to database');
             this.attributes[tbNameLocation] = location;
             info('SetLocationIntent: getting weather information for ' + location);
-            IntentHandler.handleIntentIsSailingWeather(
-                location,
-                (result) => {
+            IntentHandler.handleIntentIsSailingWeather(location)
+                .then((res) => {
                     info('SetLocationIntent finished with ' + result);
                     this.emit(':tell', result);
-                }
-            );
+                });
         }
     }
 };

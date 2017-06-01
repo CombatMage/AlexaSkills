@@ -9,9 +9,9 @@ describe("getWindFromForecast", () => {
         it("should return the first entry for the present time", () => {
             const forecast = [
                 new Wind(undefined, undefined, undefined, undefined),
-                new Wind(undefined, undefined, undefined, undefined)]
+                new Wind(undefined, undefined, undefined, undefined)];
 
-            const result = getWindFromForecast(forecast, Date.now());
+            const result = getWindFromForecast(forecast, "");
             expect(result).to.be.eql(forecast[0]);
         });
     });

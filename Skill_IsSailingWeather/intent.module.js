@@ -10,52 +10,56 @@ function handleIntentLaunch(onFinished) {
     onFinished(Speak.getLaunchMessage());
 }
 exports.handleIntentLaunch = handleIntentLaunch;
-function handleIntentIsSailingWeather(location, onFinished) {
+function handleIntentIsSailingWeather(location) {
     logger_module_1.info("handleIntentIsSailingWeather: location is " + location);
-    api_module_1.getCurrentForecast(location).then((res) => {
-        handleResponse(location, res, onFinished);
+    return api_module_1.getCurrentForecast(location).then((res) => {
+        return handleResponse(location, res);
     }).catch((error) => {
-        handleError(onFinished);
+        return handleError();
     });
 }
 exports.handleIntentIsSailingWeather = handleIntentIsSailingWeather;
-function handleResponse(requestedLocation, response, onFinished) {
+function handleResponse(requestedLocation, response) {
     const apiError = Parser.parseToError(response);
     if (apiError) {
         logger_module_1.error("handleIntentIsSailingWeather: received error from api: " + apiError.toString());
-        handleApiError(requestedLocation, apiError, onFinished);
+        return handleApiError(requestedLocation, apiError);
     }
     else {
         const forecast = Parser.parseToForecast(requestedLocation);
         if (!forecast || forecast.length === 0) {
             logger_module_1.error("handleIntentIsSailingWeather: no forecast was received from api");
-            handleError(onFinished);
+            return handleError();
         }
         else {
-            const wind = Sailing.getWindFromForecast(forecast, Date.now());
+            const wind = Sailing.getWindFromForecast(forecast, "");
             if (!wind) {
                 logger_module_1.error("handleIntentIsSailingWeather: no data was received from forecast");
-                handleError(onFinished);
+                return handleError();
             }
             else {
                 const responseStrength = Speak.getPositiveResponseForWindSpeed(wind.speedBft, requestedLocation);
                 const responseDir = Speak.getPositiveResponseForWindDirection(wind.windDirection);
-                onFinished(`${responseStrength} ${responseDir}`);
+                return `${responseStrength} ${responseDir}`;
             }
         }
     }
 }
-function handleApiError(location, error, onResult) {
+function handleApiError(location, error) {
     logger_module_1.info("handleApiError: error is " + error.toString());
     if (error.isCityUnkown) {
-        onResult(Speak.getErrorForCityUnkown(location));
+        return Speak.getErrorForCityUnkown(location);
     }
     else {
-        onResult(Speak.TELL_ERROR_UNKOWN);
+        return Speak.TELL_ERROR_UNKOWN;
     }
 }
-function handleError(onResult) {
+function handleError() {
     logger_module_1.info("handleError");
-    onResult(Speak.TELL_ERROR_UNKOWN);
+    return Speak.TELL_ERROR_UNKOWN;
 }
+// for testing only
+handleIntentIsSailingWeather("berlin").then((res) => {
+    console.log(res);
+});
 //# sourceMappingURL=intent.module.js.map

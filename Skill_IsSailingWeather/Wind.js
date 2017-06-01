@@ -18,7 +18,7 @@ class Wind {
         return this.mTimeUnix;
     }
     get timeHuman() {
-        return this.mTimeHuman;
+        return this.mTimeHuman; // "2017-05-18 09:00:00"
     }
     get windDirection() {
         logger_module_1.info("windDirection: for degree: " + this.mDegree);
@@ -84,6 +84,30 @@ class Wind {
             return 11;
         }
         return 12;
+    }
+    /**
+     * Check forecast matches to given date.
+     * @param date expected pattern is '2017-05-18'
+     */
+    isOnDate(date) {
+        const selfDate = this.timeHuman.split(" ")[0];
+        const selfDay = Number(selfDate.split("-")[2]);
+        const day = Number(date.split("-")[2]);
+        return selfDay === day;
+    }
+    /**
+     * Get the diff between the time associate with this object and given time
+     * @param time pattern is '12:00'
+     */
+    getTimeDiffMinutes(time) {
+        const selfTime = this.timeHuman.split(" ")[1];
+        const selfHour = selfTime.split(":")[0];
+        const hour = time.split(":")[0];
+        const selfMinutes = selfTime.split(":")[1];
+        const minutes = time.split(":")[1];
+        const diffMinutes = Math.abs(Number(selfMinutes) - Number(minutes));
+        const diffHours = Math.abs(Number(selfHour) - Number(hour));
+        return diffMinutes + (diffHours * 60);
     }
 }
 exports.Wind = Wind;
