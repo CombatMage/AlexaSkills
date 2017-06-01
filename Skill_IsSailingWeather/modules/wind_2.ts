@@ -1,4 +1,4 @@
-import {info, error} from "winston";
+import { info, error } from "./logger.module";
 
 export class Wind {
 

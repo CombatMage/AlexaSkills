@@ -1,10 +1,9 @@
-import { info, error } from "winston";
-
-import * as Api from "./ApiModule";
-import * as Parser from "./ParserModule";
-import * as Sailing from "./IsSailingModule";
-import * as Speak from "./SpeakModule";
-import { ApiError } from "./ApiError";
+import * as Api from "./api.module";
+import * as Parser from "./parser.module";
+import * as Sailing from "./is-sailing.module";
+import * as Speak from "./speak.module";
+import { ApiError } from "./api-error";
+import { info, error } from "./logger.module";
 
 export function handleIntentLaunch(onFinished: (message: string) => any) {
     info("handleIntentLaunch");

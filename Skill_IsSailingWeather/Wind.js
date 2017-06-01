@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const winston_1 = require("winston");
+const logger_module_1 = require("./logger.module");
 class Wind {
     constructor(mSpeedMs, mDegree, mTimeUnix, mTimeHuman) {
         this.mSpeedMs = mSpeedMs;
@@ -21,7 +21,7 @@ class Wind {
         return this.mTimeHuman;
     }
     get windDirection() {
-        winston_1.info("windDirection: for degree: " + this.mDegree);
+        logger_module_1.info("windDirection: for degree: " + this.mDegree);
         if (isNumberInRange(this.mDegree, 22.5, 67.5)) {
             return "NE";
         }
@@ -46,7 +46,7 @@ class Wind {
         return "N";
     }
     get speedBft() {
-        winston_1.info("speedBft: for speed: " + this.mSpeedMs);
+        logger_module_1.info("speedBft: for speed: " + this.mSpeedMs);
         if (this.mSpeedMs < 0.3) {
             return 0;
         }
@@ -90,4 +90,4 @@ exports.Wind = Wind;
 function isNumberInRange(value, start, end) {
     return value >= start && value < end;
 }
-//# sourceMappingURL=Wind.js.map
+//# sourceMappingURL=wind.js.map

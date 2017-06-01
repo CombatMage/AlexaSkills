@@ -4,4 +4,4 @@ function getWindFromForecast(forecast, timestamp) {
     return forecast[0];
 }
 exports.getWindFromForecast = getWindFromForecast;
-//# sourceMappingURL=IsSailingModule.js.map
+//# sourceMappingURL=is-sailing.module.js.map

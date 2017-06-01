@@ -1,5 +1,7 @@
 import { expect } from "chai";
-import { ApiError } from "../modules/ApiError";
+import { ApiError } from "../modules/api-error";
+
+process.env.NODE_ENV = "test";
 
 describe("Error", () => {
     describe("should parse error from json", () => {

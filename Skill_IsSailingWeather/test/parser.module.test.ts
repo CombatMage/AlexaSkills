@@ -1,5 +1,7 @@
 import { expect } from "chai";
-import { parseToForecast, parseToError } from "../modules/ParserModule";
+import { parseToForecast, parseToError } from "../modules/parser.module";
+
+process.env.NODE_ENV = "test";
 
 describe("Parser for OpenWeatherApi", () => {
     describe("parseToForecast", () => {

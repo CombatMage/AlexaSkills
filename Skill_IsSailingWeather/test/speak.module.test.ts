@@ -1,5 +1,7 @@
 import { expect } from "chai";
-import * as unit from "../modules/SpeakModule";
+import * as unit from "../modules/speak.module";
+
+process.env.NODE_ENV = "test";
 
 describe("Helper for language ouput", () => {
     describe("getPositiveResponseForWindDirection", () => {

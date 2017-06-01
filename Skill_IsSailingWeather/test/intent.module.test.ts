@@ -1,7 +1,9 @@
 import * as chai from "chai";
-import { handleIntentIsSailingWeather } from "../modules/IntentModule";
+import { handleIntentIsSailingWeather } from "../modules/intent.module";
 
 const expect = chai.expect;
+
+process.env.NODE_ENV = "test";
 
 describe("IntentModule", () => {
     describe("handleIntentIsSailingWeather", () => {

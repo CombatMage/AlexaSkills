@@ -1,9 +1,8 @@
 var Alexa = require('alexa-sdk');
 
-var Winston = require('winston');
-Winston.level = 'info';
-const info = Winston.info;
-const error = Winston.error;
+var logger = require('./logger.module');
+const info = logger.info;
+const error = logger.error;
 
 var SpeakHandler = require('./SpeakModule');
 var IntentHandler = require('./IntentModule');

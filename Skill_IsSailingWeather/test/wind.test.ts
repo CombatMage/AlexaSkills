@@ -1,5 +1,7 @@
 import { expect } from "chai";
-import { Wind } from "../modules/Wind";
+import { Wind } from "../modules/wind";
+
+process.env.NODE_ENV = "test";
 
 describe("Wind", () => {
     describe("should convert wind speed from m/s to beauford", () => {

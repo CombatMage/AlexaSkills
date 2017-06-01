@@ -1,6 +1,6 @@
-import { info, error } from "winston";
-import { Wind } from "./Wind";
-import { ApiError } from "./ApiError";
+import { Wind } from "./wind";
+import { ApiError } from "./api-error";
+import { info, error } from "./logger.module";
 
 export function parseToError(rawData: string): ApiError {
     info("parseToError: checking data for error " + rawData);

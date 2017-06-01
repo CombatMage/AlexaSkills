@@ -1,5 +1,5 @@
 import * as Request from "request";
-import { info, error } from "winston";
+import { info, error } from "./logger.module";
 
 const host = "api.openweathermap.org";
 const endpoint = "/data/2.5/forecast";

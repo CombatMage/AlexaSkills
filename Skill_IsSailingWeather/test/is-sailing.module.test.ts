@@ -1,6 +1,8 @@
 import { expect } from "chai";
-import { getWindFromForecast } from "../modules/IsSailingModule";
+import { getWindFromForecast } from "../modules/is-sailing.module";
 import { Wind } from "../modules/Wind";
+
+process.env.NODE_ENV = "test";
 
 describe("getWindFromForecast", () => {
     describe("returns wind information from forecast for given time", () => {

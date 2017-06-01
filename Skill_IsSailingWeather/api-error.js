@@ -15,4 +15,4 @@ class ApiError {
     }
 }
 exports.ApiError = ApiError;
-//# sourceMappingURL=ApiError.js.map
+//# sourceMappingURL=api-error.js.map

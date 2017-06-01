@@ -81,4 +81,4 @@ function getPositiveResponseForWindDirection(direction) {
     return `${exports.TELL_RESULT_DIRECTION} ${dirSpeak}`;
 }
 exports.getPositiveResponseForWindDirection = getPositiveResponseForWindDirection;
-//# sourceMappingURL=SpeakModule.js.map
+//# sourceMappingURL=speak.module.js.map
