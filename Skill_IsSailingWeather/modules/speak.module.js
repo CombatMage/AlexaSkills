@@ -57,6 +57,26 @@ function getPositiveResponseForWindSpeed(speed, location) {
     return `${exports.TELL_RESULT_STRENGTH} ${speed} in ${location}.`;
 }
 function getPositiveResponseForWindDirection(direction) {
+    const dirSpeak = convertDirectionToLanguage(direction);
+    return `${exports.TELL_RESULT_DIRECTION} ${dirSpeak}`;
+}
+function getRepeatMessage() {
+    return exports.ASK_REPEAT;
+}
+exports.getRepeatMessage = getRepeatMessage;
+function getLaunchMessage() {
+    return exports.ASK_INTRO;
+}
+exports.getLaunchMessage = getLaunchMessage;
+function getRequestForLocation() {
+    return exports.ASK_LOCATION;
+}
+exports.getRequestForLocation = getRequestForLocation;
+function getResponseForHelp() {
+    return exports.ASK_HELP;
+}
+exports.getResponseForHelp = getResponseForHelp;
+function convertDirectionToLanguage(direction) {
     let dirSpeak = "";
     if (direction === "N") {
         dirSpeak = exports.DIR_N;
@@ -82,22 +102,7 @@ function getPositiveResponseForWindDirection(direction) {
     else if (direction === "NW") {
         dirSpeak = exports.DIR_NW;
     }
-    return `${exports.TELL_RESULT_DIRECTION} ${dirSpeak}`;
+    return dirSpeak;
 }
-function getRepeatMessage() {
-    return exports.ASK_REPEAT;
-}
-exports.getRepeatMessage = getRepeatMessage;
-function getLaunchMessage() {
-    return exports.ASK_INTRO;
-}
-exports.getLaunchMessage = getLaunchMessage;
-function getRequestForLocation() {
-    return exports.ASK_LOCATION;
-}
-exports.getRequestForLocation = getRequestForLocation;
-function getResponseForHelp() {
-    return exports.ASK_HELP;
-}
-exports.getResponseForHelp = getResponseForHelp;
+exports.convertDirectionToLanguage = convertDirectionToLanguage;
 //# sourceMappingURL=speak.module.js.map

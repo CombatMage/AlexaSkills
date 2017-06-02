@@ -6,6 +6,7 @@
         "outDir": "./"
     },
     "include": [
+        "index.ts",
         "modules/**/*.ts"
     ],
     "exclude": [
