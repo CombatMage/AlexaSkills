@@ -1,3 +1,11 @@
+import { SpeakResult } from "./speak-result";
+import { ApiError } from "./api-error";
+import { Wind } from "./wind";
+
+
+const TELL = ":tell";
+const ASK = ":ask";
+
 export let ASK_INTRO = `
     Willkommen bei Segelwetter, wie kann ich dir helfen?
     Du kannst mich nach dem Wind in einer bestimmten Stadt fragen.
@@ -31,6 +39,38 @@ export let DIR_SW = "Süd-West";
 export let DIR_W = "West";
 export let DIR_NW = "Nord-West";
 
+export function getErrorApi(error: ApiError, location: string): SpeakResult {
+    let message: string;
+    if (error.isCityUnkown) {
+        message = `${TELL_ERROR_CITY_NOT_FOUND} für ${location}`;
+    } else {
+        message = TELL_ERROR_UNKOWN;
+    }
+    return new SpeakResult(TELL, message, "");
+}
+
+export function getErrorGeneric(): SpeakResult {
+    return new SpeakResult(TELL, TELL_ERROR_UNKOWN, "");
+}
+
+export function getResultForWind(wind: Wind, location: string, date: string, time: string): SpeakResult {
+    const responseStrength = getPositiveResponseForWindSpeed(wind.speedBft, location);
+    const responseDir = getPositiveResponseForWindDirection(wind.windDirection);
+    const message = `${responseStrength} ${responseDir}`;
+    return new SpeakResult(TELL, message, "");
+}
+
+function getPositiveResponseForWindSpeed(
+    speed: number,
+    location: string): string {
+    return `${TELL_RESULT_STRENGTH} ${speed} in ${location}.`;
+}
+
+function getPositiveResponseForWindDirection(direction: string) {
+    const dirSpeak = convertDirectionToLanguage(direction);
+    return `${TELL_RESULT_DIRECTION} ${dirSpeak}`;
+}
+
 export function getRepeatMessage(): string {
     return ASK_REPEAT;
 }
@@ -43,21 +83,11 @@ export function getRequestForLocation(): string {
     return ASK_LOCATION;
 }
 
-export function getErrorForCityUnkown(location: string): string {
-    return `${TELL_ERROR_CITY_NOT_FOUND} für ${location}`;
-}
-
 export function getResponseForHelp(): string {
     return ASK_HELP;
 }
 
-export function getPositiveResponseForWindSpeed(
-    speed: number,
-    location: string): string {
-    return `${TELL_RESULT_STRENGTH} ${speed} in ${location}.`;
-}
-
-export function getPositiveResponseForWindDirection(direction: string) {
+export function convertDirectionToLanguage(direction: string): string {
     let dirSpeak = "";
     if (direction === "N") {
         dirSpeak = DIR_N;
@@ -76,5 +106,5 @@ export function getPositiveResponseForWindDirection(direction: string) {
     } else if (direction === "NW") {
         dirSpeak = DIR_NW;
     }
-    return `${TELL_RESULT_DIRECTION} ${dirSpeak}`;
+    return dirSpeak;
 }

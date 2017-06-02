@@ -67,7 +67,7 @@ var handlers = {
             IntentHandler.handleIntentIsSailingWeather(location)
                 .then((res) => {
                     info('on IsSailingWeatherIntent finished with ' + result);
-                    this.emit(':tell', result);
+                    this.emit(res.type, result);
                 });
         };
     },
@@ -93,7 +93,7 @@ var handlers = {
             IntentHandler.handleIntentIsSailingWeather(location)
                 .then((res) => {
                     info('SetLocationIntent finished with ' + result);
-                    this.emit(':tell', result);
+                    this.emit(res.type, result);
                 });
         }
     }

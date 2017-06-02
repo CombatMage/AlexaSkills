@@ -1,5 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const speak_result_1 = require("./speak-result");
+const TELL = ":tell";
+const ASK = ":ask";
 exports.ASK_INTRO = `
     Willkommen bei Segelwetter, wie kann ich dir helfen?
     Du kannst mich nach dem Wind in einer bestimmten Stadt fragen.
@@ -28,30 +31,31 @@ exports.DIR_S = "Süd";
 exports.DIR_SW = "Süd-West";
 exports.DIR_W = "West";
 exports.DIR_NW = "Nord-West";
-function getRepeatMessage() {
-    return exports.ASK_REPEAT;
+function getErrorApi(error, location) {
+    let message;
+    if (error.isCityUnkown) {
+        message = `${exports.TELL_ERROR_CITY_NOT_FOUND} für ${location}`;
+    }
+    else {
+        message = exports.TELL_ERROR_UNKOWN;
+    }
+    return new speak_result_1.SpeakResult(TELL, message, "");
 }
-exports.getRepeatMessage = getRepeatMessage;
-function getLaunchMessage() {
-    return exports.ASK_INTRO;
+exports.getErrorApi = getErrorApi;
+function getErrorGeneric() {
+    return new speak_result_1.SpeakResult(TELL, exports.TELL_ERROR_UNKOWN, "");
 }
-exports.getLaunchMessage = getLaunchMessage;
-function getRequestForLocation() {
-    return exports.ASK_LOCATION;
+exports.getErrorGeneric = getErrorGeneric;
+function getResultForWind(wind, location, date, time) {
+    const responseStrength = getPositiveResponseForWindSpeed(wind.speedBft, location);
+    const responseDir = getPositiveResponseForWindDirection(wind.windDirection);
+    const message = `${responseStrength} ${responseDir}`;
+    return new speak_result_1.SpeakResult(TELL, message, "");
 }
-exports.getRequestForLocation = getRequestForLocation;
-function getErrorForCityUnkown(location) {
-    return `${exports.TELL_ERROR_CITY_NOT_FOUND} für ${location}`;
-}
-exports.getErrorForCityUnkown = getErrorForCityUnkown;
-function getResponseForHelp() {
-    return exports.ASK_HELP;
-}
-exports.getResponseForHelp = getResponseForHelp;
+exports.getResultForWind = getResultForWind;
 function getPositiveResponseForWindSpeed(speed, location) {
     return `${exports.TELL_RESULT_STRENGTH} ${speed} in ${location}.`;
 }
-exports.getPositiveResponseForWindSpeed = getPositiveResponseForWindSpeed;
 function getPositiveResponseForWindDirection(direction) {
     let dirSpeak = "";
     if (direction === "N") {
@@ -80,5 +84,20 @@ function getPositiveResponseForWindDirection(direction) {
     }
     return `${exports.TELL_RESULT_DIRECTION} ${dirSpeak}`;
 }
-exports.getPositiveResponseForWindDirection = getPositiveResponseForWindDirection;
+function getRepeatMessage() {
+    return exports.ASK_REPEAT;
+}
+exports.getRepeatMessage = getRepeatMessage;
+function getLaunchMessage() {
+    return exports.ASK_INTRO;
+}
+exports.getLaunchMessage = getLaunchMessage;
+function getRequestForLocation() {
+    return exports.ASK_LOCATION;
+}
+exports.getRequestForLocation = getRequestForLocation;
+function getResponseForHelp() {
+    return exports.ASK_HELP;
+}
+exports.getResponseForHelp = getResponseForHelp;
 //# sourceMappingURL=speak.module.js.map

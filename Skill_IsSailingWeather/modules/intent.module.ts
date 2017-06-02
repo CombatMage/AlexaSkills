@@ -4,6 +4,7 @@ import * as Speak from "./speak.module";
 
 import { getCurrentForecast } from "./api.module";
 import { ApiError } from "./api-error";
+import { SpeakResult } from "./speak-result";
 import { info, error } from "./logger.module";
 
 export function handleIntentLaunch(onFinished: (message: string) => any) {
@@ -11,50 +12,29 @@ export function handleIntentLaunch(onFinished: (message: string) => any) {
     onFinished(Speak.getLaunchMessage());
 }
 
-export function handleIntentIsSailingWeather(location: string): Promise<string> {
+export function handleIntentIsSailingWeather(location: string): Promise<SpeakResult> {
     info("handleIntentIsSailingWeather: location is " + location);
 
     return getCurrentForecast(location).then((res) => {
-        return handleResponse(location, res);
-    }).catch((error) => {
-        return handleError();
-    });
-}
+        const apiError = Parser.parseToError(res);
+        const forecast = Parser.parseToForecast(res);
+        // TODO these values should be provided by the user
+        const now = new Date();
+        const date = now.getFullYear() + "-" + now.getMonth() + "-" + now.getDay();
+        const time = now.getHours() + ":" + now.getMinutes;
 
-function handleResponse(requestedLocation: string, response: string): string {
-    const apiError = Parser.parseToError(response);
-    if (apiError) {
-        error("handleIntentIsSailingWeather: received error from api: " + apiError.toString());
-        return handleApiError(requestedLocation, apiError);
-    } else {
-        const forecast = Parser.parseToForecast(response);
-        if (!forecast || forecast.length === 0) {
-            error("handleIntentIsSailingWeather: no forecast was received from api");
-            return handleError();
+        if (apiError) {
+            return Speak.getErrorApi(apiError, location);
         } else {
-            const wind = Sailing.getWindFromForecast(forecast, "");
-            if (!wind) {
-                error("handleIntentIsSailingWeather: no data was received from forecast");
-                return handleError();
+            const requestedWindData = Sailing.getWindFromForecast(forecast, date, time);
+            if (!requestedWindData) {
+                error("handleIntentIsSailingWeather: no suitable data was found");
+                return Speak.getErrorGeneric();
             } else {
-                const responseStrength = Speak.getPositiveResponseForWindSpeed(wind.speedBft, requestedLocation);
-                const responseDir = Speak.getPositiveResponseForWindDirection(wind.windDirection);
-                return `${responseStrength} ${responseDir}`;
+                return Speak.getResultForWind(requestedWindData, location, date, time);
             }
         }
-    }
-}
-
-function handleApiError(location: string, error: ApiError): string {
-    info("handleApiError: error is " + error.toString());
-    if (error.isCityUnkown) {
-        return Speak.getErrorForCityUnkown(location);
-    } else {
-        return Speak.TELL_ERROR_UNKOWN;
-    }
-}
-
-function handleError(): string {
-    info("handleError");
-    return Speak.TELL_ERROR_UNKOWN;
+    }).catch((error) => {
+        return Speak.getErrorGeneric();
+    });
 }

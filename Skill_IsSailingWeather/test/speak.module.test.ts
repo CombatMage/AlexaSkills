@@ -1,38 +1,25 @@
 import { expect } from "chai";
-import * as unit from "../modules/speak.module";
+import { Wind } from "../modules/wind";
+import { getResultForWind, convertDirectionToLanguage } from "../modules/speak.module";
 
 process.env.NODE_ENV = "test";
 
 describe("Helper for language ouput", () => {
-    describe("getPositiveResponseForWindDirection", () => {
-        it("should return a positive response for alexa, containing the given direction", () => {
-            const response = unit.getPositiveResponseForWindDirection("NE");
-            expect(response).to.be.string;
-            expect(response).to.contain(unit.DIR_NE);
-            expect(response).to.contain(unit.TELL_RESULT_DIRECTION);
+    describe("getResultForWind", () => {
+        it("it should contain the requested location", () => {
+            const wind = new Wind(0, 0, 0, "");
+            const result = getResultForWind(wind, "Berlin", "", "");
+            expect(result.message).to.contain("Berlin");
         });
-    });
-    describe("getPositiveResponseForWindSpeed", () => {
-        it("should return a positive response for alexa, containing the given wind information", () => {
-            const response = unit.getPositiveResponseForWindSpeed(6, "Erkner");
-            expect(response).to.be.string;
-            expect(response).to.contain("6");
-            expect(response).to.contain("Erkner");
-            expect(response).to.contain(unit.TELL_RESULT_STRENGTH);
+        it("it should contain the wind speed", () => {
+            const wind = new Wind(10, 0, 0, "");
+            const result = getResultForWind(wind, "", "", "");
+            expect(result.message).to.contain(wind.speedBft);
         });
-    });
-    describe("getLaunchMessage", () => {
-        it("should return the launch message, informing the user of possible actions", () => {
-            const response = unit.getLaunchMessage();
-            expect(response).to.be.string;
-            expect(response).to.contain(unit.ASK_INTRO);
-        });
-    });
-    describe("getRequestForLocation", () => {
-        it("should ask the user for his desired location", () => {
-            const response = unit.getRequestForLocation();
-            expect(response).to.be.string;
-            expect(response).to.contain(unit.ASK_LOCATION);
+        it("it should contain the wind direction", () => {
+            const wind = new Wind(0, 120, 0, "");
+            const result = getResultForWind(wind, "", "", "");
+            expect(result.message).to.contain(convertDirectionToLanguage(wind.windDirection));
         });
     });
 });

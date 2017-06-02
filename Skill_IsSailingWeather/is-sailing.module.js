@@ -5,9 +5,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * If no time was given, the first entry is returned.
  * If the time is more than 6 hours in the future, no forecast is returned.
  * @param forecast List of wind objects
+ * @param date desired time in forma "2017-05-18"
  * @param time desired time in format "12:00"
  */
-function getWindFromForecast(forecast, time) {
+function getWindFromForecast(forecast, date, time) {
     if (!forecast || forecast.length === 0) {
         return undefined;
     }

@@ -11,7 +11,7 @@ describe("getWindFromForecast", () => {
                 new Wind(undefined, undefined, undefined, undefined),
                 new Wind(undefined, undefined, undefined, undefined)];
 
-            const result = getWindFromForecast(forecast, "");
+            const result = getWindFromForecast(forecast, "", "");
             expect(result).to.be.eql(forecast[0]);
         });
     });
