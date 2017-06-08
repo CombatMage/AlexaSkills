@@ -14,10 +14,13 @@ export function getWindFromForecast(forecast: Wind[], date: string, time: string
     } else if (!time) {
         return forecast[0];
     } else {
-        // let searchedForecast: Wind;
-        // let diff = 6 * 60;
+        const windOnDate = forecast.filter((item) => {
+            item.isOnDate(date);
+        });
 
-        // TODO
+        if (windOnDate) {
+            return windOnDate[0];
+        }
 
         return forecast[0];
     }
