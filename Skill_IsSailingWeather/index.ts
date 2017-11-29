@@ -7,7 +7,6 @@ import { info, error } from "./modules/logger.module";
 
 const tbNameLocation = "tbNameLocation";
 
-
 function launchRequestHandler() {
     info("launchRequestHandler");
     IntentHandler.handleIntentLaunch(
